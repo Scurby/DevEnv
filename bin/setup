@@ -68,10 +68,10 @@ fi
 
 # TODO Add check for default browser
 # Edit browser as desired.
-export BROWSER=chromium
+export BROWSER=google-chrome
 
 if [ -x /usr/bin/chromium ]; then
-  BROWSER=/usr/bin/chromium
+  BROWSER=/usr/bin/google-chrome-stable
 fi
 
 #export BROWSER=firefox

@@ -5,6 +5,7 @@
 # Author: Scurby <scurby@swgemu.com>
 #
 # Created: Mar 4 2015
+# TODO quiet the apt commands
 
 logger -t options "** OPTIONS **"
 
@@ -40,10 +41,27 @@ if yorn "Would you like to install Dropbox??"; then
       ~/.dropbox-dist/dropboxd & disown
 fi
 
+################
+# Atom
+################
+if yorn "Would you like to install Atom ?"; then
+	cd setup
+	wget -O atom-amd64.deb https://atom.io/download/deb
+	sudo dpkg -i atom-amd64.deb
+fi
 
+################
+# Google Chrome
+################
+if yorn "Would you like to install Google Chrome?"; then
+      wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+      sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+      sudo apt-get update
+      sudo apt-get install google-chrome-stable
+fi
 
-
-
+################
+# Editor
 ################
 logstep "Editor"
 export VISUAL=$(cat ~/.visual 2> /dev/null)
@@ -132,8 +150,9 @@ fi
 ######################
 # Remove un-needed files
 ######################
+	# TODO remove tarballs
 logstep "Finalizing install"
-  sudo apt-get -y update &>> ~/Documents/pkglog.txt
+#  sudo apt-get -y update &>> ~/Documents/pkglog.txt
   echo
   echo "Thanks for the fish...  "
   echo

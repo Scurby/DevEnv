@@ -2,7 +2,7 @@
 #
 # swgemu (wip)
 
-cd /home/swgemu/workspace/DevEnv/bin/swgemu/
+cd bin
 EXTRA=$1
 
 case $EXTRA in

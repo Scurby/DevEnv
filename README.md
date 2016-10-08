@@ -44,7 +44,7 @@ Copy this series of commands into a terminal: Installs git, downloads scripts an
 
 The following scripts are run from the command line. They are numbered in the order I use them.
 
-1. install - Installs required packages and programs including Lua, BerkelyDB, and others. Asks to run 'start' script.
+1. install - Installs required packages and programs including Lua, BerkelyDB, and others.
 2. setup - Setup of development environment follows these steps:
    * Choose editor
    * Setup git user.* config
@@ -68,7 +68,6 @@ The following scripts are run from the command line. They are numbered in the or
    * uses gdb in batch mode and starts with the commands  in ~/run/run_gdb which you can change to your pleasing; (breakpoints, dumps, settings etc.)
 5. devtools - Installs Optional packages including xclip, vim, quassel, and others. Installs eclipse mars, imports project and sets git team properties.
    * (Requires Egit-properties.tar.gz in /home/setup/ )
-   * (Requires indexing exlusions)
 6. latest - do a quick git-stash, git-pull, and git-stash-apply so you can get to the latest code w/o loosing local work.
 
 ### The following scripts are also useful...
@@ -86,7 +85,7 @@ The following scripts are run from the command line. They are numbered in the or
 **************************************************************************************
 #### Useful Stuff
 * git log --pretty=format:'%h was %an, %ar, message: %s' -10
-* PATH=$PATH:$HOME/bin
+* export PATH=$PATH:$HOME/bin
 
 **************************************************************************************
 #### FIXME's

@@ -1,0 +1,141 @@
+#!/bin/bash
+#
+# devtools - Recommended packages for swgemu development environment
+#
+# Author: Scurby <scurby@swgemu.com>
+#
+# Created: Mar 4 2015
+
+logger -t options "** OPTIONS **"
+
+##############################################################################
+# Common functions and setup
+##############################################################################
+yorn() {
+  echo -n -e "$@ Y\b"
+  read yorn
+  case $yorn in
+    [Nn]* ) return 1;;
+  esac
+  return 0
+}
+
+logstep() {
+  let "step=$step + 1"
+  echo ${tc_smso}$(head -c $(tput cols) < /dev/zero | tr '\0' '*')${tc_rmso}
+  echo "${tc_smso}**${tc_rmso} STEP $step >> $*"
+  logger -t options "STEP $step >> $*"
+}
+
+step=0
+tc_smso=$(tput smso)
+tc_rmso=$(tput rmso)
+
+#################
+#Dropbox install
+#################
+logstep "Dropbox"
+if yorn "Would you like to install Dropbox??"; then
+      cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+      ~/.dropbox-dist/dropboxd & disown
+fi
+
+
+
+
+
+################
+logstep "Editor"
+export VISUAL=$(cat ~/.visual 2> /dev/null)
+
+while [ ! -n "$VISUAL" ]
+do
+  read -p "Would you prefer atom, vim, nano, or gedit to edit files? " ed
+  case $ed in
+   [Aa]* ) echo 'atom' > ~/.visual ;;
+   [Nn]* ) echo 'nano' > ~/.visual ;;
+   [Gg]* ) echo 'gedit' > ~/.visual ;;
+   [Vv]* ) echo 'vim' > ~/.visual ;;
+  esac
+sudo apt-get -y -q install $ed
+  export VISUAL=$(cat ~/.visual 2> /dev/null)
+done
+
+echo "Editor set to: $VISUAL"
+##
+
+
+#################
+# Recommended packages
+# xclip terminator vim chromium quassel git-cola etc...
+#################
+logstep "Optional packages."
+echo  " The following packages or programs are optional. "
+echo
+echo	" qtcreator xclip terminator quassel git-cola. "
+echo
+echo	" Add or remove as desired in '/home/bin/devtools' "
+echo
+if yorn "Would you like to install the optional packages now??"; then
+  for i in qtcreator xclip terminator quassel git-cola
+    do
+      echo " Installing ${i} ... "
+      sudo apt-get -q -y install ${i} &>> ~/Documents/pkglog.txt
+    done
+fi
+
+#################
+# Eclipse install
+#################
+logstep "Setup Eclipse"
+
+dir=~/setup/
+eclipse_base=~/setup/eclipse-cpp-mars-2-linux-gtk-x86_64.tar.gz
+
+if yorn "Would you like to install Eclipse??"; then
+  if [ ! -f $eclipse_base ]; then
+    cd $dir
+    wget http://mirrors.xmission.com/eclipse/technology/epp/downloads/release/mars/2/eclipse-cpp-mars-2-linux-gtk-x86_64.tar.gz
+  fi
+
+  if [ -d ~/eclipse ]; then
+    echo "Looks like eclipse is already installed"
+  else
+    echo "Restoring basic eclipse install from $eclipse_base"
+    cd ~
+    ~/bin/bar $eclipse_base | tar xfz -
+    echo "Import eclipse project settings (might take a few minutes)"
+    for i in Core3/MMOCoreORB PublicEngine/MMOEngine Tools
+    do
+      if [ -f ~/workspace/$i/.project ]; then
+        echo "Importing $i"
+        ~/eclipse/eclipse \
+        -nosplash \
+        -data ~/workspace \
+        -application org.eclipse.cdt.managedbuilder.core.headlessbuild \
+        -import ~/workspace/$i
+      else
+        echo "Missing project file for $i?"
+      fi
+    done
+
+    for dir in ~/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/*
+    do
+      echo "Setup Egit properties for "$(basename $dir)
+      cd $dir
+      tar xzf ~/setup/Egit-properties.tar.gz
+    done
+    echo "Eclipse setup and import complete"
+    echo "Add additional packages in Eclipse as desired. (LUA Development Tools is recommended. )"
+  fi
+fi
+######################
+# Remove un-needed files
+######################
+logstep "Finalizing install"
+  sudo apt-get -y update &>> ~/Documents/pkglog.txt
+  echo
+  echo "Thanks for the fish...  "
+  echo
+
+exit 0

@@ -1,0 +1,30 @@
+#!/bin/bash
+#
+# Borrowed from http://jetpackweb.com/blog/2009/07/20/bash-script-to-create-mysql-database-and-user/
+# REQUIRES ROOT PERMISSIONS
+# Syntax = createdb dbname dbuser dbpass
+
+EXPECTED_ARGS=3
+E_BADARGS=65
+MYSQL=`which mysql`
+
+Q1="CREATE DATABASE IF NOT EXISTS $1;"
+Q2="GRANT USAGE ON *.* TO $2@localhost IDENTIFIED BY '$3';"
+Q3="GRANT ALL PRIVILEGES ON $1.* TO $2@localhost;"
+Q4="FLUSH PRIVILEGES;"
+SQL="${Q1}${Q2}${Q3}${Q4}"
+
+if [ $# -ne $EXPECTED_ARGS ]
+then
+  echo "Usage: $0 dbname dbuser dbpass"
+  exit $E_BADARGS
+fi
+
+$MYSQL -uroot -p -e "$SQL"
+
+
+# MYSQL=`which mysql`
+# $MYSQL -uroot -p -e CREATE DATABASE IF NOT EXISTS swgemu;
+# $MYSQL -uroot -p -e GRANT USAGE ON *.* TO swgemu@localhost IDENTIFIED BY '123456';
+# $MYSQL -uroot -p -e GRANT ALL PRIVILEGES ON swgemu.* TO swgemu@localhost;
+# $MYSQL -uroot -p -e FLUSH PRIVILEGES;

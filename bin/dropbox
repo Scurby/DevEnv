@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+# Headless Dropbox Install
+#
+
+echo "Installing dropbox"
+echo "Sources:"
+echo "https://www.dropbox.com/install?os=linux"
+
+cd
+wget -O - "https://www.dropbox.com/download?plat=lnx.x86"|tar xzf -
+~/.dropbox-dist/dropboxd && disown

@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# admin - Sets Acct with ID of 1 to Admin
+#
+# Author: Scurby <scurby@swgemu.com>
+#
+# Created: Apr 26 2015
+#
+# Run after first acct is created. Only applies to `account_id`='1'
+# TODO Make configurable for acct and level and pw
+mysql -p123456 -e UPDATE `swgemu`.`accounts` SET `admin_level`=15 WHERE `account_id`='1';

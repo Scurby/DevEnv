@@ -1,0 +1,70 @@
+#!/bin/bash
+#
+#
+#
+#
+# open terminal - log in as root
+
+
+yorn() {
+  echo -n -e "$@ Y\b"
+  read yorn
+  case $yorn in
+    [Nn]* ) return 1;;
+  esac
+  return 0
+}
+
+##############################################################################
+cd
+clear
+echo "https://www.privateinternetaccess.com/forum/discussion/18063/debian-8-1-0-jessie-sudo-fix-not-installed-by-default"
+
+
+# echo Switch to root user
+su
+echo  "The command prompt should now look like this..."
+echo  "root@debian:/home/swgemu# "
+
+# echo Install "sudo"
+
+apt-get install sudo
+
+adduser swgemu sudo
+
+nano /etc/sudoers
+
+echo     - Scroll down and look for the line "%sudo  ALL=(ALL:ALL) ALL"
+echo     - Below that line type in the following...
+echo         "swgemu  ALL=(ALL:ALL) ALL"
+echo  "Press 'Ctrl+x' then press 'y' and then press [enter] to exit and save the file"
+
+exit
+
+exit
+
+echo
+echo "Now let's open a new Terminal and test to see if sudo is working for your user name"
+echo     - Click "Activities"
+echo     - Click in the "Type to search..." box
+echo     - Type in "Terminal" and press the [enter] key
+echo     - Test sudo by typing the following command...
+sudo ls
+
+echo
+echo     - If the output looks like the following...
+echo         swgemu is not in the sudoers file.  This incident will be reported.
+echo     - then you might have to start from the beginning of these instructions and try again.
+echo
+echo     - If the output looks like this...
+echo         Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos
+echo     - Your username now has sudo rights, congratulations!
+echo
+echo Enjoy!
+if yorn "Would you like to open a root terminal now?"; then
+#    su
+    nohup terminator --title 'prime' -e su
+  else
+  exit 0
+fi
+exit 0

@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+# swgemu (wip)
+
+cd /home/swgemu/workspace/DevEnv/bin/swgemu/
+EXTRA=$1
+
+case $EXTRA in
+  devtools ) ./devtools ;;
+  install ) ./install ;;
+  setup ) ./setup ;;
+  start ) ./start ;;
+#  stop )
+  latest ) ./latest ;;
+  build ) ./build ;;
+esac

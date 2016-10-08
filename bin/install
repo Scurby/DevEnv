@@ -1,0 +1,147 @@
+#!/bin/bash
+#
+# install - Required programs and packages install for swgemu development environment
+#
+# Author: Scurby <scurby@swgemu.com>
+#
+# Created: Mar 4 2015
+#
+
+logger -t first "** INSTALL **"
+
+##############################################################################
+# Common functions and setup
+##############################################################################
+yorn() {
+  echo -n -e "$@ Y\b"
+  read yorn
+  case $yorn in
+    [Nn]* ) return 1;;
+  esac
+  return 0
+}
+
+logmsg() {
+  echo "${tc_smso}**${tc_rmso} $*"
+  logger -t first "$*"
+}
+
+logstep() {
+  let "step=$step + 1"
+  echo ${tc_smso}$(head -c $(tput cols) < /dev/zero | tr '\0' '*')${tc_rmso}
+  echo "${tc_smso}**${tc_rmso} STEP $step >> $*"
+  logger -t first "STEP $step >> $*"
+}
+
+step=0
+tc_smso=$(tput smso)
+tc_rmso=$(tput rmso)
+
+#################
+# Required packages
+#################
+logstep "Required packages."
+
+logmsg  " The following packages or programs are required. Be prepared to enter password for sudo."
+logmsg
+cd
+if yorn "Would you like to install the required packages now??"; then
+  for i in libdb5.3-dev wget autoconf automake autotools-dev g++ gcc gccxml gdb libc6-dev libdb-dev libtool make screen libreadline-gplv2-dev libncurses5-dev libneon27 libaprutil1-dev openjdk-7-jre openjdk-7-jre-headless libgtest-dev libssl-dev liblua5.1-0-dev
+      do
+        logmsg " Installing ${i} ... "
+        sudo apt-get -q -y install ${i} &>> ~/Documents/pkglog.txt
+      done
+  else
+    logmsg " You need to do it before you can build the server. "
+    exit 0
+fi
+
+#################
+# Lua install
+# INFO -wget http://www.lua.org/ftp/lua-5.3.3.tar.gz ## saved to home/setup/
+#################
+logstep "Lua 5.3.3 Install"
+
+dir=~/setup/
+lua_base=~/setup/lua-5.3.3.tar.gz
+lua_ins=/usr/local/bin/lua
+
+if [ -f $lua_ins ]; then
+ logmsg "Great, looks like you have Lua installed.!"
+  else
+    while ! yorn "Would you like to install Lua 5.3.3 now??"
+      do
+        echo "***You need to do it before you can build the server.*** )"
+        sleep 1
+      done
+  if [ ! -f $lua_base ]; then
+    logmsg "Downloading required lua package to ~/home/setup/. Please wait.."
+    cd $dir
+    wget http://www.lua.org/ftp/lua-5.3.3.tar.gz
+  fi
+  logmsg
+  logmsg "Restoring basic lua install from $lua_base"
+  logmsg
+  for dir in ~/setup/
+    do
+      cd $dir
+      tar xzf ~/setup/lua-5.3.3.tar.gz &>> ~/Documents/pkglog.txt
+      cd lua-5.3.3
+      sudo make linux install &>> ~/Documents/pkglog.txt
+      sudo make test &>> ~/Documents/pkglog.txt
+      cd
+    done
+# TODO add check here
+  logmsg
+  logmsg "You have successfully installed Lua if you see 'Hello world, from Lua 5.3!' in the terminal."
+  logmsg
+fi
+
+
+##############################################################################
+# MySQL Install
+##############################################################################
+logstep "MySQL Install"
+
+mysql_pkg=/usr/share/mysql/mysql_system_tables.sql
+if [ -f $mysql_pkg ]; then
+  logmsg "Looks like MySQL is installed!"
+else
+  while ! yorn "Would you like to install MySQL now??"
+    do
+      echo "You need to do it before you can build and run the server. (cntl+c to exit)"
+      sleep 1
+    done
+    logmsg " $mysql_pkg not found. "
+    logmsg " "
+    logmsg " Installing MySQL... "
+    logmsg " "
+  cd
+    for i in mysql-server-core-5.5 mysql-server-5.5 mysql-workbench libmysqlclient-dev
+      do
+        logmsg " Installing ${m} ... "
+        sudo apt-get -q -y install ${i} &>> ~/Documents/pkglog.txt
+      done
+fi
+
+######################
+# Remove un-needed files
+######################
+logstep "Finalizing install and removing un-needed files."
+
+sudo apt-get update &>> ~/Documents/pkglog.txt
+sudo apt-get autoremove &>> ~/Documents/pkglog.txt
+sudo service mysql start
+cd $dir
+rm lua-5.3.3.tar.gz
+rm -rf lua-5.3.3
+logmsg
+logmsg "Run the 'first' script at any time to check installation of required packages."
+logmsg
+logmsg "You should be ready to run the 'start' script."
+logmsg
+
+if yorn "Would you like to run 'start' now?'?"; then
+      ~/bin/03start
+fi
+exit 0

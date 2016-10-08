@@ -1,0 +1,3 @@
+set print asm-demangle on
+set pagination off
+run

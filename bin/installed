@@ -1,0 +1,22 @@
+#!/bin/bash
+#
+# installed - Package and version check sent to ~/Documents/installed.txt
+# Author: Scurby <scurby@swgemu.com>
+# Created: Mar 5 2015
+# Updated: Oct 3 2016
+
+cd ~/Documents
+  rm installed.txt
+  echo "***   java   ***" &>> ~/Documents/installed.txt
+  java -version 2>&1 &>> ~/Documents/installed.txt
+  echo "***   LUA   ***" &>> ~/Documents/installed.txt
+  lua -v 2>&1 &>> ~/Documents/installed.txt
+    for i in atom gedit nano vim xclip terminator quassel automake bash g++ gcc gdb libtool make mysql db5.3 libncurses5-dev libneon27 libaprutil1-dev  libgtest-dev
+      do
+        echo " " &>> ~/Documents/installed.txt
+        echo " ${i} "
+        echo "***   ${i}   ***" &>> ~/Documents/installed.txt
+        dpkg -l | grep ${i} | grep ii &>> ~/Documents/installed.txt
+      done
+  echo " See ~/Documents/installed.txt"
+exit 0

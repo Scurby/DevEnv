@@ -45,7 +45,7 @@ if yorn "Would you like to install the required packages now??"; then
   for i in libdb5.3-dev wget autoconf automake autotools-dev g++ gcc gccxml gdb libc6-dev libdb-dev libtool make screen libreadline-gplv2-dev libncurses5-dev libneon27 libaprutil1-dev openjdk-7-jre openjdk-7-jre-headless libgtest-dev libssl-dev liblua5.1-0-dev
       do
         echo " Installing ${i} ... "
-        sudo apt-get -q -y install ${i} &>> ~/Documents/pkglog.txt
+        sudo apt-get -y install ${i} &>> ~/Documents/pkglog.txt
       done
   else
     echo " You need to do it before you can build the server. "
@@ -116,7 +116,7 @@ else
     for i in mysql-server-core-5.5 mysql-server-5.5 mysql-workbench libmysqlclient-dev
       do
         echo " Installing ${i} ... "
-        sudo apt-get -q -y install ${i} &>> ~/Documents/pkglog.txt
+        sudo apt-get install ${i} &>> ~/Documents/pkglog.txt
       done
 fi
 

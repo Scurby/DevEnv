@@ -45,6 +45,7 @@ fi
 # Atom
 ################
 if yorn "Would you like to install Atom ?"; then
+	sudo apt-get install gvfs-bin
 	cd setup
 	wget -O atom-amd64.deb https://atom.io/download/deb
 	sudo dpkg -i atom-amd64.deb

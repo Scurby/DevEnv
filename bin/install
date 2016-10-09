@@ -116,7 +116,7 @@ else
     for i in mysql-server-core-5.5 mysql-server-5.5 mysql-workbench libmysqlclient-dev
       do
         echo " Installing ${i} ... "
-        sudo apt-get install ${i} &>> ~/Documents/pkglog.txt
+        sudo apt-get install ${i}
       done
 fi
 

@@ -42,7 +42,7 @@ echo  " The following packages or programs are required. Be prepared to enter pa
 echo
 cd
 if yorn "Would you like to install the required packages now??"; then
-  for i in libdb5.3-dev wget autoconf automake autotools-dev g++ gcc gccxml gdb libc6-dev libdb-dev libtool make screen libreadline-gplv2-dev libncurses5-dev libneon27 libaprutil1-dev openjdk-7-jre openjdk-7-jre-headless libgtest-dev libssl-dev liblua5.1-0-dev
+  for i in libdb5.3-dev wget autoconf automake autotools-dev g++ gcc gccxml gdb libc6-dev libdb-dev libtool make screen xclip libreadline-gplv2-dev libncurses5-dev libneon27 libaprutil1-dev openjdk-7-jre openjdk-7-jre-headless libgtest-dev libssl-dev liblua5.1-0-dev
       do
         echo " Installing ${i} ... "
         sudo apt-get -y install ${i} &>> ~/Documents/pkglog.txt

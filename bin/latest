@@ -6,3 +6,7 @@ git pull
 git stash apply
 cd ~/workspace/PublicEngine
 git pull
+cd ~/workspace/Tools
+git stash
+git pull
+git stash apply

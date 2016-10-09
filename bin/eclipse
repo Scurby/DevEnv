@@ -27,7 +27,7 @@ else
   cd ~
   ~/bin/bar $eclipse_base | tar xfz -
   echo "Import eclipse project settings (might take a few minutes)"
-  for i in Core3/MMOCoreORB PublicEngine/MMOEngine Tools
+  for i in Core3/MMOCoreORB PublicEngine/MMOEngine Tools/*
   do
     if [ -f ~/workspace/$i/.project ]; then
       echo "Importing $i"

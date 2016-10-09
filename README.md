@@ -85,7 +85,10 @@ The following scripts are run from the command line. They are numbered in the or
 **************************************************************************************
 #### Useful Stuff
 * git log --pretty=format:'%h was %an, %ar, message: %s' -10
-* export PATH=$PATH:$HOME/bin
+
+* add to .bashrc
+	* PATH=$PATH:$HOME/bin
+	* export PATH
 
 **************************************************************************************
 #### FIXME's

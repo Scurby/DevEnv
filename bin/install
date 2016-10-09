@@ -45,7 +45,7 @@ if yorn "Would you like to install the required packages now??"; then
   for i in libdb5.3-dev wget autoconf automake autotools-dev g++ gcc gccxml gdb libc6-dev libdb-dev libtool make screen xclip libreadline-gplv2-dev libncurses5-dev libneon27 libaprutil1-dev openjdk-7-jre openjdk-7-jre-headless libgtest-dev libssl-dev liblua5.1-0-dev
       do
         echo " Installing ${i} ... "
-        sudo apt-get -y install ${i} &>> ~/Documents/pkglog.txt
+        sudo apt-get -q install ${i} | tee -a ~/Documents/pkglog.txt
       done
   else
     echo " You need to do it before you can build the server. "
@@ -81,10 +81,10 @@ if [ -f $lua_ins ]; then
   for dir in ~/setup/
     do
       cd $dir
-      tar xzf ~/setup/lua-5.3.3.tar.gz &>> ~/Documents/pkglog.txt
+      tar xzf ~/setup/lua-5.3.3.tar.gz | tee -a ~/Documents/pkglog.txt
       cd lua-5.3.3
-      sudo make linux install &>> ~/Documents/pkglog.txt
-      sudo make test &>> ~/Documents/pkglog.txt
+      sudo make linux install | tee -a ~/Documents/pkglog.txt
+      sudo make test | tee -a ~/Documents/pkglog.txt
       cd
     done
 # TODO add check here
@@ -116,7 +116,7 @@ else
     for i in mysql-server-core-5.5 mysql-server-5.5 mysql-workbench libmysqlclient-dev
       do
         echo " Installing ${i} ... "
-        sudo apt-get install ${i}
+        sudo apt-get install ${i} | tee -a ~/Documents/pkglog.txt
       done
 fi
 
@@ -125,8 +125,8 @@ fi
 ######################
 logstep "Finalizing install and removing un-needed files."
 
-sudo apt-get update &>> ~/Documents/pkglog.txt
-sudo apt-get autoremove &>> ~/Documents/pkglog.txt
+sudo apt-get -q update | tee -a ~/Documents/pkglog.txt
+sudo apt-get autoremove | tee -a ~/Documents/pkglog.txt
 sudo service mysql start
 cd $dir
 rm lua-5.3.3.tar.gz

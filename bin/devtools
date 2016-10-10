@@ -49,7 +49,7 @@ fi
 # 	cd setup
 # 	wget -O atom-amd64.deb https://atom.io/download/deb
 # 	sudo dpkg -i atom-amd64.deb
-fi
+# fi
 
 ################
 # Google Chrome
@@ -99,7 +99,7 @@ if yorn "Would you like to install the optional packages now??"; then
   for i in xclip terminator quassel git-cola cmake-gui
     do
       echo " Installing ${i} ... "
-      sudo apt-get -q -y install ${i} &>> ~/Documents/pkglog.txt
+      sudo apt-get install ${i} | tee -a ~/Documents/pkglog.txt
     done
 fi
 
@@ -148,7 +148,7 @@ fi
 #     echo "Add additional packages in Eclipse as desired. (LUA Development Tools is recommended. )"
 #   fi
 # fi
-#
+
 # ######################
 # # wxLua wxWidgets
 # ######################

@@ -403,7 +403,7 @@ else
   if yorn "Would you like to edit the default configuration?"; then
     while :
     do
-      $VISUAL -w -s $runcfg
+      $VISUAL $runcfg
       logmsg "Checking config syntax..."
       if zones=$(cd $rundir;echo 'for k,v in pairs(ZonesEnabled) do io.write(v .. " ") end' | lua -l conf/config); then
 	logmsg "SUCCESS - $runcfg passed lua parser"

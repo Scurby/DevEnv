@@ -36,7 +36,7 @@ tc_rmso=$(tput rmso)
 ################
 # QTCreator
 ################
-sudo apt-get install qtcreator
+sudo apt-get install qtcreator | tee -a ~/Documents/pkglog.txt
 
 
 
@@ -52,7 +52,7 @@ if yorn "Would you like to install Atom ?"; then
 	sudo apt-get install gvfs-bin
 	cd setup
 	wget -O atom-amd64.deb https://atom.io/download/deb
-	sudo dpkg -i atom-amd64.deb
+	sudo dpkg -i atom-amd64.deb | tee -a ~/Documents/pkglog.txt
 fi
 
 #################
@@ -109,10 +109,10 @@ fi
 
 wget https://raw.githubusercontent.com/pkulchenko/ZeroBraneStudio/master/build/build-linux.sh
 
-sudo apt-get install libgtk-3-dev build-essential checkinstall
-sudo apt-get install gtk+-2.0
+sudo apt-get install libgtk-3-dev build-essential checkinstall  | tee -a ~/Documents/pkglog.txt
+sudo apt-get install gtk+-2.0 | tee -a ~/Documents/pkglog.txt
 
-./wxLuainstall wxwidgets wxlua
+./wxLuainstall wxwidgets wxlua | tee -a ~/Documents/pkglog.txt
 
 
 #########
@@ -130,7 +130,7 @@ sudo apt-get install libgtk-3-dev build-essential checkinstall
 # ./configure --disable-shared --enable-unicode
 # make
 # # sudo make install
-# sudo checkinstall
+# sudo checkinstall | tee -a ~/Documents/pkglog.txt
 
 ########
 # sudo apt-get install cmake
@@ -143,7 +143,7 @@ sudo apt-get install libgtk-3-dev build-essential checkinstall
 ######################
 	# TODO remove tarballs
 logstep "Finalizing install"
-#  sudo apt-get -y update &>> ~/Documents/pkglog.txt
+#  sudo apt-get -y update | tee -a ~/Documents/pkglog.txt
   echo
   echo "Thanks for the fish...  "
   echo

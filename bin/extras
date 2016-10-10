@@ -49,7 +49,7 @@ if yorn "Would you like to install the EXTRA packages now??"; then
   for i in libgtest-dev ctags vim-doc vim-scripts chromium-l10n gawk-doc firmware-crystalhd libqca2-plugin-cyrus-sasl libqca2-plugin-gnupg libqca2-plugin-ossl libqt4-dev qt4-qtconfig phonon-backend-gstreamer phonon-backend-mplayer videolan-doc autoconf2.13 autoconf-archive gnu-standards autoconf-doc libtool gettext g++-multilib g++-4.7-multilib gcc-4.7-doc libstdc++6-4.7-dbg libstdc++6-4.7-doc gdb-doc git-daemon-run git-daemon-sysvinit git-doc git-el git-arch git-cvs git-email git-gui gitk gitweb openssh-server libtool-doc gfortran fortran95-compiler gcj doc-base krb5-doc krb5-user postgresql-doc-9.1 sqlite3-doc libipc-sharedcache-perl libterm-readkey-perl tinyca python-crypto-dbg python-crypto-doc python-pysqlite2-doc python-pysqlite2-dbg apache2-doc apache2-suexec apache2-suexec-custom httpd-cgi libcgi-fast-perl tcl-tclreadline
       do
         logmsg " Installing ${i} ... "
-        sudo apt-get -q -y install ${i} &>> ~/Documents/pkglogExtras.txt
+        sudo apt-get install ${i} | tee -a ~/Documents/pkglogExtras.txt
       done
   else
     exit 0

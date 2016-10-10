@@ -45,7 +45,7 @@ if yorn "Would you like to install the required packages now??"; then
   for i in libdb5.3-dev wget autoconf automake autotools-dev g++ gcc gccxml gdb libc6-dev libdb-dev libtool make screen xclip libreadline-gplv2-dev libncurses5-dev libneon27 libaprutil1-dev openjdk-7-jre openjdk-7-jre-headless libgtest-dev libssl-dev liblua5.1-0-dev
       do
         echo " Installing ${i} ... "
-        sudo apt-get -q install ${i} | tee -a ~/Documents/pkglog.txt
+        sudo apt-get install ${i} | tee -a ~/Documents/pkglog.txt
       done
   else
     echo " You need to do it before you can build the server. "
@@ -125,16 +125,16 @@ fi
 ######################
 logstep "Finalizing install and removing un-needed files."
 
-sudo apt-get -q update | tee -a ~/Documents/pkglog.txt
+sudo apt-get update | tee -a ~/Documents/pkglog.txt
 sudo apt-get autoremove | tee -a ~/Documents/pkglog.txt
 sudo service mysql start
 cd $dir
 rm lua-5.3.3.tar.gz
 rm -rf lua-5.3.3
 echo
-echo "Run the 'first' script at any time to check installation of required packages."
+echo "Run the 'swgemu install' script at any time to check installation of required packages."
 echo
-echo "You should be ready to run the 'start' script."
+echo "You should be ready to run 'swgemu setup' ."
 echo
 
 exit 0

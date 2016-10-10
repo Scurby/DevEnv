@@ -105,8 +105,8 @@ wget https://raw.githubusercontent.com/pkulchenko/ZeroBraneStudio/master/build/b
 sudo apt-get install libgtk-3-dev build-essential checkinstall  | tee -a ~/Documents/pkglog.txt
 sudo apt-get install gtk+-2.0 | tee -a ~/Documents/pkglog.txt
 
-# ./wxLuainstall wxwidgets wxlua | tee -a ~/Documents/pkglog.txt
-
+./wxLuainstall wxwidgets | tee -a ~/Documents/pkglog.txt
+./wxLuainstall wxlua | tee -a ~/Documents/pkglog.txt # TODO fails here. ugh.
 
 #########
 # wget https://sourceforge.net/projects/wxlua/files/wxlua/2.8.12.3/wxLua-2.8.12.3-src.tar.gz
@@ -124,11 +124,6 @@ sudo apt-get install libgtk-3-dev build-essential checkinstall
 # make
 # # sudo make install
 # sudo checkinstall | tee -a ~/Documents/pkglog.txt
-
-########
-# sudo apt-get install cmake
-#
-# wget https://sourceforge.net/projects/wxlua/files/wxlua/2.8.12.3/wxLua-2.8.12.3-src.tar.gz
 
 
 ######################

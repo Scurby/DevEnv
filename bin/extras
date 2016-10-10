@@ -40,13 +40,13 @@ tc_rmso=$(tput rmso)
 #################
 # Extra packages
 #################
-logstep "EXTRA packages."
+logstep Suggested packages."
 
 logmsg  " The following packages are suggested. Be prepared to enter password for sudo."
 logmsg
 cd
-if yorn "Would you like to install the EXTRA packages now??"; then
-  for i in libgtest-dev ctags vim-doc vim-scripts chromium-l10n gawk-doc firmware-crystalhd libqca2-plugin-cyrus-sasl libqca2-plugin-gnupg libqca2-plugin-ossl libqt4-dev qt4-qtconfig phonon-backend-gstreamer phonon-backend-mplayer videolan-doc autoconf2.13 autoconf-archive gnu-standards autoconf-doc libtool gettext g++-multilib g++-4.7-multilib gcc-4.7-doc libstdc++6-4.7-dbg libstdc++6-4.7-doc gdb-doc git-daemon-run git-daemon-sysvinit git-doc git-el git-arch git-cvs git-email git-gui gitk gitweb openssh-server libtool-doc gfortran fortran95-compiler gcj doc-base krb5-doc krb5-user postgresql-doc-9.1 sqlite3-doc libipc-sharedcache-perl libterm-readkey-perl tinyca python-crypto-dbg python-crypto-doc python-pysqlite2-doc python-pysqlite2-dbg apache2-doc apache2-suexec apache2-suexec-custom httpd-cgi libcgi-fast-perl tcl-tclreadline
+if yorn "Would you like to install the extra packages now??"; then
+  for i in firmware-crystalhd libqca2-plugin-cyrus-sasl libqca2-plugin-gnupg libqca2-plugin-ossl libqt4-dev phonon-backend-gstreamer phonon-backend-mplayer videolan-doc libdvdcss2 python-simplejson git-doc libqt4-declarative-folderlistmodel libqt4-declarative-gestures libqt4-declarative-particles libqt4-declarative-shaders qt4-qmlviewer python-qt4-dbg xxdiff-scripts codeblocks eclipse ninja-build gcc-multilib autoconf automake libtool flex bison gdb gcc-doc gcc-4.9-multilib gcc-4.9-doc gcc-4.9-locales libgcc1-dbg libgomp1-dbg libitm1-dbg libatomic1-dbg libasan1-dbg liblsan0-dbg libtsan0-dbg libubsan0-dbg libcilkrts5-dbg libquadmath0-dbg glibc-doc db5.3-doc autoconf-archive gnu-standards autoconf-doc libtool g++-multilib g++-4.9-multilib gcc-4.9-doc libstdc++6-4.9-dbg libstdc++-4.9-doc gdb-doc libtool-doc gfortran fortran95-compiler gcj-jdk iselect screenie byobu ncurses-doc default-jre equivs icedtea-7-plugin icedtea-7-jre-jamvm sun-java6-fonts fonts-ipafont-gothic fonts-ipafont-mincho ttf-wqy-microhei ttf-wqy-zenhei fonts-indic readline-doc libmldbm-perl libnet-daemon-perl libsql-statement-perl libipc-sharedcache-perl tinyca libhdf4-doc libhdf4-alt-dev hdf4-tools libnetcdf4 libmyodbc odbc-postgresql tdsodbc unixodbc-bin ogdi-bin python-crypto-dbg python-crypto-doc python-pysqlite2-doc python-pysqlite2-dbg qtbase5-dev kdelibs5-data subversion dh-make debian-keyring libcairo2-doc libglib2.0-doc libgtk-3-doc libice-doc libpango1.0-doc libsm-doc libxcb-doc libxext-doc libmail-box-perl libgtk2.0-doc
       do
         logmsg " Installing ${i} ... "
         sudo apt-get install ${i} | tee -a ~/Documents/pkglogExtras.txt

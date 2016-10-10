@@ -40,7 +40,7 @@ tc_rmso=$(tput rmso)
 #################
 # Extra packages
 #################
-logstep Suggested packages."
+logstep "Suggested packages."
 
 logmsg  " The following packages are suggested. Be prepared to enter password for sudo."
 logmsg

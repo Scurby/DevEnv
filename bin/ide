@@ -38,18 +38,11 @@ tc_rmso=$(tput rmso)
 ################
 sudo apt-get install qtcreator | tee -a ~/Documents/pkglog.txt
 
-
-
-
-
-
-
-
 ################
 # Atom
 ################
 if yorn "Would you like to install Atom ?"; then
-	sudo apt-get install gvfs-bin
+	sudo apt-get install gvfs-bin | tee -a ~/Documents/pkglog.txt
 	cd setup
 	wget -O atom-amd64.deb https://atom.io/download/deb
 	sudo dpkg -i atom-amd64.deb | tee -a ~/Documents/pkglog.txt
@@ -112,7 +105,7 @@ wget https://raw.githubusercontent.com/pkulchenko/ZeroBraneStudio/master/build/b
 sudo apt-get install libgtk-3-dev build-essential checkinstall  | tee -a ~/Documents/pkglog.txt
 sudo apt-get install gtk+-2.0 | tee -a ~/Documents/pkglog.txt
 
-./wxLuainstall wxwidgets wxlua | tee -a ~/Documents/pkglog.txt
+# ./wxLuainstall wxwidgets wxlua | tee -a ~/Documents/pkglog.txt
 
 
 #########

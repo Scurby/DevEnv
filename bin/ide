@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /bin/bash
 #
 # ide - IDE packages for swgemu development environment
 #

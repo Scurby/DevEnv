@@ -101,7 +101,7 @@ fi
 # TODO test on fresh
 
 wget https://raw.githubusercontent.com/pkulchenko/ZeroBraneStudio/master/build/build-linux.sh
-
+sudo apt-get install libwxgtk3.0-dev
 sudo apt-get install libgtk-3-dev build-essential checkinstall  | tee -a ~/Documents/pkglog.txt
 sudo apt-get install gtk+-2.0 | tee -a ~/Documents/pkglog.txt
 

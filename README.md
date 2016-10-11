@@ -44,7 +44,7 @@ Copy this series of commands into a terminal: Installs git, downloads scripts an
 
 The following scripts are run from the command line. They are numbered in the order I use them.
 
-1. install - Installs required packages and programs including Lua, BerkelyDB, and others.
+1. reqd - Installs required packages and programs including Lua, BerkelyDB, and others.
 2. setup - Setup of development environment follows these steps:
    * Choose editor
    * Setup git user.* config
@@ -56,7 +56,7 @@ The following scripts are run from the command line. They are numbered in the or
    * Engine library
    * MySQL database checks
    * Server configuration
-   * Tre files (Thet will need to be copied or moved)
+   * Tre files (They will need to be copied or moved)
    * Asks if you want to build and run the server.
 3. build - simple build script
    * 3 options- build, build config, build clean
@@ -66,9 +66,10 @@ The following scripts are run from the command line. They are numbered in the or
    * outputs a screenlog to ~/run/screenlog*
    * use the config.lua in ~/run/conf/ to relace the config.lua in ~/MMOCoreORB/bin/conf.
    * uses gdb in batch mode and starts with the commands  in ~/run/run_gdb which you can change to your pleasing; (breakpoints, dumps, settings etc.)
-5. devtools - Installs Optional packages including xclip, vim, quassel, and others. Installs eclipse mars, imports project and sets git team properties.
+5. devtools - Installs Optional packages including xclip, vim, quassel, and others. 
+6. ide - Installs IDE. QTCreator - Atom - wxLua - Eclipse mars, imports project and sets git team properties. 
    * (Requires Egit-properties.tar.gz in /home/setup/ )
-6. latest - do a quick git-stash, git-pull, and git-stash-apply so you can get to the latest code w/o loosing local work.
+7. latest - do a quick git-stash, git-pull, and git-stash-apply so you can get to the latest code w/o loosing local work.
 
 ### The following scripts are also useful...
 * ack - Nice source grep tool (try: cd ~/workspace/MMOCoreORB/src; ack PlanetManager).

@@ -38,7 +38,7 @@ https://www.digitalocean.com/community/tutorials/how-to-add-delete-and-grant-sud
 
 Copy this series of commands into a terminal: Installs git, downloads scripts and installs them.
 
-	sudo apt-get update && sudo apt-get install -y -q git && git clone https://github.com/Scurby/DevEnv.git && cp -i /home/swgemu/DevEnv/README.md /home/swgemu/Documents && mkdir bin && cp -i /home/swgemu/DevEnv/bin/* /home/swgemu/bin/ && mkdir setup && cp -i /home/swgemu/DevEnv/setup/* /home/swgemu/setup/ && mkdir run && cp -r /home/swgemu/DevEnv/run/* /home/swgemu/run/ && chmod -v +x /home/swgemu/bin/* && export PATH=$PATH:$HOME/bin
+	sudo apt-get update && sudo apt-get install -y -q git && git clone https://github.com/Scurby/DevEnv.git && cp -i /home/swgemu/DevEnv/README.md /home/swgemu/Documents && mkdir setup && cp -i /home/swgemu/DevEnv/setup/* /home/swgemu/setup/ && mkdir run && cp -r /home/swgemu/DevEnv/run/* /home/swgemu/run/ && chmod -v +x /home/swgemu/DevEnv/bin/* && export PATH=$PATH:$HOME/DevEnv/bin
 
 ## Run setup scripts
 

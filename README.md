@@ -87,7 +87,7 @@ The following scripts are run from the command line. They are numbered in the or
 * git log --pretty=format:'%h was %an, %ar, message: %s' -10
 
 * add to .bashrc
-	* PATH=$PATH:$HOME/bin
+	* PATH=$PATH:$HOME/DevEnv/bin
 	* export PATH
 
 **************************************************************************************

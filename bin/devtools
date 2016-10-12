@@ -35,6 +35,10 @@ tc_rmso=$(tput rmso)
 #################
 #Dropbox install
 #################
+# if [ ! "$(which g++)" ]; then
+#   echo "Error: g++ isn't found. Please install GNU C++ compiler."
+#   exit 1
+# fi
 logstep "Dropbox"
 if yorn "Would you like to install Dropbox??"; then
       cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
@@ -45,7 +49,7 @@ fi
 # Atom
 ################
  if yorn "Would you like to install Atom ?"; then
- 	sudo apt-get install gvfs-bin
+ 	sudo apt-get -y install gvfs-bin
  	cd setup
  	wget -O atom-amd64.deb https://atom.io/download/deb
  	sudo dpkg -i atom-amd64.deb
@@ -57,8 +61,8 @@ fi
 if yorn "Would you like to install Google Chrome?"; then
       wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
       sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-      sudo apt-get update
-      sudo apt-get install google-chrome-stable
+      sudo apt-get -y update
+      sudo apt-get -y install google-chrome-stable
 fi
 
 ################
@@ -99,7 +103,7 @@ if yorn "Would you like to install the optional packages now??"; then
   for i in xclip terminator quassel git-cola cmake-gui
     do
       echo " Installing ${i} ... "
-      sudo apt-get install ${i} | tee -a ~/Documents/pkglog.txt
+      sudo apt-get -y install ${i} | tee -a ~/Documents/pkglog.txt
     done
 fi
 

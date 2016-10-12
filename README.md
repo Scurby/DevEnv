@@ -64,10 +64,10 @@ The following scripts are run from the command line. They are numbered in the or
    * Using this command to start the server will:
    * launches the server under gdb on a 'screen'.
    * outputs a screenlog to ~/run/screenlog*
-   * use the config.lua in ~/run/conf/ to relace the config.lua in ~/MMOCoreORB/bin/conf.
+   * use the config.lua in ~/run/conf/ to replace the config.lua in ~/MMOCoreORB/bin/conf.
    * uses gdb in batch mode and starts with the commands  in ~/run/run_gdb which you can change to your pleasing; (breakpoints, dumps, settings etc.)
-5. devtools - Installs Optional packages including xclip, vim, quassel, and others. 
-6. ide - Installs IDE. QTCreator - Atom - wxLua - Eclipse mars, imports project and sets git team properties. 
+5. devtools - Installs Optional packages including xclip, vim, quassel, and others.
+6. ide - Installs IDE. QTCreator - Atom - wxLua - Eclipse mars, imports project and sets git team properties.
    * (Requires Egit-properties.tar.gz in /home/setup/ )
 7. latest - do a quick git-stash, git-pull, and git-stash-apply so you can get to the latest code w/o loosing local work.
 

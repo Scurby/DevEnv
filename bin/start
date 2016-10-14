@@ -61,7 +61,7 @@ export ERRFILE="/tmp/run_dev$$"
   echo "$0 $(date)"
   # Should we build?
   if [ "X$BUILDARG" != "X-" ]; then
-    if ~/bin/build $BUILDARG; then
+    if ~/DevEnv/bin/build $BUILDARG; then
       :
     else
       echo "BUILD FAILED" > $ERRFILE

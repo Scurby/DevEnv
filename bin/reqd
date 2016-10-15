@@ -44,7 +44,7 @@ cd
 if yorn "Would you like to install the required packages now??"; then
   for i in libdb5.3-dev wget autoconf automake autotools-dev g++ gcc gccxml gdb libc6-dev libdb-dev libtool make screen xclip libreadline-gplv2-dev libncurses5-dev libneon27 libaprutil1-dev openjdk-7-jre openjdk-7-jre-headless libgtest-dev libssl-dev liblua5.1-0-dev
       do
-        echo " Installing ${i} ... "
+        echo " Installing ${i} ... " | tee -a ~/Documents/pkglog.txt
         sudo apt-get -y install ${i} | tee -a ~/Documents/pkglog.txt
       done
   else

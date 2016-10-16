@@ -373,10 +373,11 @@ if mysql -p123456 -NB -e 'show databases'|grep swgemu > /dev/null 2>&1; then
   logmsg "swgemu database already exists"
   :
 else
-  logmsg "Enter root password"
+  logmsg "Enter mysql root password"
   createdb swgemu swgemu 123456      # See createdb script in /home/bin
   logmsg "Restore blank swgemu database to mysql"
   mysql -p123456 -e source -e ~/workspace/Core3/MMOCoreORB/sql/swgemu.sql;
+  logmsg "Enter mysql root password"
   createdb mantis swgemu 123456      # See createdb script in /home/bin
   logmsg "Restore blank mantis database to mysql"
   mysql -p123456 -e source -e ~/workspace/Core3/MMOCoreORB/sql/mantis.sql;

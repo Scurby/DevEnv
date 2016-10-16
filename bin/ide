@@ -69,7 +69,7 @@ if yorn "Would you like to install Eclipse??"; then
   else
     echo "Restoring basic eclipse install from $eclipse_base"
     cd ~
-    ~/bin/bar $eclipse_base | tar xfz -
+    ~/DevEnv/bin/bar $eclipse_base | tar xfz -
     echo "Import eclipse project settings (might take a few minutes)"
     for i in Core3/MMOCoreORB PublicEngine/MMOEngine Tools/*
     do
@@ -104,14 +104,15 @@ fi
 echo TODO run 'reqd' before this. gcc needed.
 if yorn "Would you like to install wxLua ?"; then
 # wget https://raw.githubusercontent.com/pkulchenko/ZeroBraneStudio/master/build/build-linux.sh
-  sudo apt-get install cmake
-  sudo apt-get install libwxgtk3.0-dev  | tee -a ~/Documents/lualog.txt
-  sudo apt-get install libgtk-3-dev | tee -a ~/Documents/lualog.txt
-  sudo apt-get install gtk+-2.0 | tee -a ~/Documents/lualog.txt
-  sudo ~/DevEnv/bin/wxLuainstall 5.3 | tee -a ~/Documents/lualog.txt
-  sudo ~/DevEnv/bin/wxLuainstall jit | tee -a ~/Documents/lualog.txt
+  # sudo apt-get install cmake
+  # sudo apt-get install libwxgtk3.0-dev  | tee -a ~/Documents/lualog.txt
+  # sudo apt-get install libgtk-3-dev | tee -a ~/Documents/lualog.txt
+  # sudo apt-get install gtk+-2.0 | tee -a ~/Documents/lualog.txt
+  sudo ~/DevEnv/bin/wxDeb | tee -a ~/Documents/lualog.txt
+  # sudo ~/DevEnv/bin/wxLuainstall 5.3 | tee -a ~/Documents/lualog.txt
+  # sudo ~/DevEnv/bin/wxLuainstall jit | tee -a ~/Documents/lualog.txt
   sudo ~/DevEnv/bin/wxLuainstall wxwidgets | tee -a ~/Documents/lualog.txt
-  sudo ~/DevEnv/bin/wxLuainstall lua | tee -a ~/Documents/lualog.txt
+  # sudo ~/DevEnv/bin/wxLuainstall lua | tee -a ~/Documents/lualog.txt
   sudo ~/DevEnv/bin/wxLuainstall wxlua | tee -a ~/Documents/lualog.txt
 fi
 

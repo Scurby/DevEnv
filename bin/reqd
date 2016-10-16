@@ -62,37 +62,52 @@ dir=~/setup/
 lua_base=~/setup/lua-5.3.3.tar.gz
 lua_ins=/usr/local/bin/lua
 
-if [ -f $lua_ins ]; then
- echo "Great, looks like you have Lua installed.!"
-  else
-    while ! yorn "Would you like to install Lua 5.3.3 now??"
-      do
-        echo "***You need to do it before you can build the server.*** )"
-        sleep 1
-      done
-  if [ ! -f $lua_base ]; then
-    echo "Downloading required lua package to ~/home/setup/. Please wait.."
-    cd $dir
-    wget http://www.lua.org/ftp/lua-5.3.3.tar.gz
-  fi
-  echo
-  echo "Restoring basic lua install from $lua_base"
-  echo
-  for dir in ~/setup/
-    do
-      cd $dir
-      tar xzf ~/setup/lua-5.3.3.tar.gz | tee -a ~/Documents/pkglog.txt
-      cd lua-5.3.3
-      sudo make linux install | tee -a ~/Documents/pkglog.txt
-      sudo make test | tee -a ~/Documents/pkglog.txt
-      cd
-    done
-# TODO add check here
-  echo
-  echo "You have successfully installed Lua if you see 'Hello world, from Lua 5.3!' in the terminal."
-  echo
-fi
+# if [ -f $lua_ins ]; then
+#  echo "Great, looks like you have Lua installed.!"
+#   else
+#     while ! yorn "Would you like to install Lua 5.3.3 now??"
+#       do
+#         echo "***You need to do it before you can build the server.*** )"
+#         sleep 1
+#       done
+#   if [ ! -f $lua_base ]; then
+#     echo "Downloading required lua package to ~/home/setup/. Please wait.."
+#     cd $dir
+#     wget http://www.lua.org/ftp/lua-5.3.3.tar.gz
+#   fi
+#   echo
+#   echo "Restoring basic lua install from $lua_base"
+#   echo
+#   for dir in ~/setup/
+#     do
+#       cd $dir
+#       tar xzf ~/setup/lua-5.3.3.tar.gz | tee -a ~/Documents/pkglog.txt
+#       cd lua-5.3.3
+#       sudo make linux install | tee -a ~/Documents/pkglog.txt
+#       sudo make test | tee -a ~/Documents/pkglog.txt
+#       cd
+#     done
+# # TODO add check here
+#   echo
+#   echo "You have successfully installed Lua if you see 'Hello world, from Lua 5.3!' in the terminal."
+#   echo
+# fi
 
+ if [ -f $lua_ins ]; then
+  echo "Great, looks like you have Lua installed.!"
+   else
+     while ! yorn "Would you like to install Lua 5.3.3 now??"
+       do
+         echo "You need to do it before you can build and run the server. (cntl+c to exit)"
+         sleep 1
+       done
+    sudo ~/DevEnv/bin/wxDeb | tee -a ~/Documents/lualog.txt
+    sudo ~/DevEnv/bin/wxLuainstall 5.3 | tee -a ~/Documents/lualog.txt
+    sudo ~/DevEnv/bin/wxLuainstall jit | tee -a ~/Documents/lualog.txt
+    sudo ~/DevEnv/bin/wxLuainstall wxwidgets | tee -a ~/Documents/lualog.txt
+    sudo ~/DevEnv/bin/wxLuainstall lua | tee -a ~/Documents/lualog.txt
+    sudo ~/DevEnv/bin/wxLuainstall wxlua | tee -a ~/Documents/lualog.txt
+fi
 
 ##############################################################################
 # MySQL Install

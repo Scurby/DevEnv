@@ -109,10 +109,10 @@ if yorn "Would you like to install wxLua ?"; then
   # sudo apt-get install libgtk-3-dev | tee -a ~/Documents/lualog.txt
   # sudo apt-get install gtk+-2.0 | tee -a ~/Documents/lualog.txt
   sudo ~/DevEnv/bin/wxDeb | tee -a ~/Documents/lualog.txt
-  # sudo ~/DevEnv/bin/wxLuainstall 5.3 | tee -a ~/Documents/lualog.txt
-  # sudo ~/DevEnv/bin/wxLuainstall jit | tee -a ~/Documents/lualog.txt
+  sudo ~/DevEnv/bin/wxLuainstall 5.3 | tee -a ~/Documents/lualog.txt
+  sudo ~/DevEnv/bin/wxLuainstall jit | tee -a ~/Documents/lualog.txt
   sudo ~/DevEnv/bin/wxLuainstall wxwidgets | tee -a ~/Documents/lualog.txt
-  # sudo ~/DevEnv/bin/wxLuainstall lua | tee -a ~/Documents/lualog.txt
+  sudo ~/DevEnv/bin/wxLuainstall lua | tee -a ~/Documents/lualog.txt
   sudo ~/DevEnv/bin/wxLuainstall wxlua | tee -a ~/Documents/lualog.txt
 fi
 

@@ -15,21 +15,21 @@ fi
 BUILDARG=$1
 
 # Did we just launch ourselves?
-if [ -n "$RUNDEV_AUTO" ]; then
-  BUILDARG='-'
-else
-  # If we have local X11 and $2=eclipse we try and launch a terminal
-  if xset q > /dev/null 2>&1 && [ "X$DISPLAY" = "X:0.0" -a "X$2" = "Xeclipse" ]; then
-    export RUNDEV_AUTO='Y'
-    nohup gnome-terminal --title 'run_dev' -e $0 > ~/tmp/rundev.out 2>&1 &
-    exit
-  fi
-fi
+# if [ -n "$RUNDEV_AUTO" ]; then
+#   BUILDARG='-'
+# else
+#   # If we have local X11 and $2=eclipse we try and launch a terminal
+#   if xset q > /dev/null 2>&1 && [ "X$DISPLAY" = "X:0.0" -a "X$2" = "Xeclipse" ]; then
+#     export RUNDEV_AUTO='Y'
+#     nohup gnome-terminal --title 'run_dev' -e $0 > ~/tmp/rundev.out 2>&1 &
+#     exit
+#   fi
+# fi
 
 if SERVER_PID=$(pgrep core3); then
   echo "** Server appears to be running as pid $SERVER_PID **"
   echo ""
-  echo " Server shutdown = save - wait for 'IDLE'; exit; cntl+c; q; y; "
+  echo " Server shutdown = shutdown "
   echo -e "** Want me to try: screen -x -r to join the console? Y\b\c"
   read yorn
   case $yorn in
@@ -107,7 +107,7 @@ export ERRFILE="/tmp/run_dev$$"
   ports=$(echo 'print(string.format("pingport=%d, port=%d\n", PingPort, PingPort+1))' | lua -l 'conf/config' -)
 
   mysql -p123456 swgemu -v -e "update galaxy set name = '$name', $ports;"
-  ~/bin/updateip
+  ~/DevEnv/bin/updateip
   echo "$0 STARTING SERVER UNDER GDB"
 ) 2>&1 | tee screenlog.0
 

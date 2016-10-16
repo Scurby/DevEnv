@@ -35,11 +35,6 @@ nory() {
   return 1
 }
 
-logmsg() {
-  echo "${tc_smso}**${tc_rmso} $*"
-  logger -t setup "$*"
-}
-
 logstep() {
   let "step=$step + 1"
   echo ${tc_smso}$(head -c $(tput cols) < /dev/zero | tr '\0' '*')${tc_rmso}
@@ -90,7 +85,7 @@ fi
 # TODO add confirmation and validity check
 
 if [ "X$MODE" = "Xfresh" -o "X$MODE" = "Xclean" ]; then
-  logmsg "Starting $MODE" ;
+  echo "Starting $MODE" ;
   export HISTSIZE=0
   rm -fr ~/new_run
   mkdir ~/new_run
@@ -105,7 +100,7 @@ if [ "X$MODE" = "Xfresh" -o "X$MODE" = "Xclean" ]; then
   # Everything gone? Your virtual machine is ready to share.
   # Done if all we needed to do was clean
   if [ "X$MODE" = "Xclean" ]; then
-    logmsg "Done $MODE" ;
+    echo "Done $MODE" ;
     exit 0
   fi
 fi
@@ -129,7 +124,7 @@ logstep "Editor"
 #   export VISUAL=$(cat ~/.visual 2> /dev/null)
 # done
 
-logmsg "Editor set to: $VISUAL"
+echo "Editor set to: $VISUAL"
 
 ##############################################################################
 # Setup git user.* config
@@ -143,8 +138,8 @@ fi
 
 # Start with basic stuff, git setup:
 if [ ! -f ~/.gitconfig ]; then
-  logmsg "We need to setup your git info for your commits."
-  logmsg "These will show up when you commit to Gerrit so you want them to be useful to the real world."
+  echo "We need to setup your git info for your commits."
+  echo "These will show up when you commit to Gerrit so you want them to be useful to the real world."
 
   while [ ! -f ~/.gitconfig ]
   do
@@ -179,14 +174,14 @@ if [ ! -f ~/.gitconfig ]; then
       git config --global user.name "$new_username"
       git config --global user.email "$new_email"
     else
-      logmsg "let's try again **"
+      echo "let's try again **"
     fi
   done
 fi
 
 git config --list | while read f
 do
-  logmsg "git $f"
+  echo "git $f"
 done
 
 email_address=$(git config --get user.email)
@@ -196,15 +191,15 @@ email_address=$(git config --get user.email)
 ##############################################################################
 logstep "SSH Key"
 if [ ! -d ~/.ssh -o ! -f ~/.ssh/id_rsa ]; then
-  logmsg "Ok looks like you need ssh keys, let's make some for you!"
+  echo "Ok looks like you need ssh keys, let's make some for you!"
   mkdir -p ~/.ssh > /dev/null 2>&1
   ssh-keygen -t rsa -q -N "" -C "emudev-"$(date +%Y%m%d)"-${email_address}" -f ~/.ssh/id_rsa
-  logmsg "Your new key is in ~/.ssh/id_rsa and the public key is in ~/.ssh/id_rsa.pub"
+  echo "Your new key is in ~/.ssh/id_rsa and the public key is in ~/.ssh/id_rsa.pub"
   if [ -n "$SSH_AGENT_PID" ]; then
     ssh-add
   fi
 else
-  logmsg "Your public ssh key is in ~/.ssh/id_rsa.pub"
+  echo "Your public ssh key is in ~/.ssh/id_rsa.pub"
 fi
 
 ##############################################################################
@@ -233,7 +228,7 @@ if [ ! -n "$gerrit_username" ]; then
   echo
 
   if $HAVEX11 && xclip -selection clipboard < ~/.ssh/id_rsa.pub; then
-    logmsg "I've also sent this to your clipboard via xclip to make it easier if you're on a graphical console to just paste it directly."
+    echo "I've also sent this to your clipboard via xclip to make it easier if you're on a graphical console to just paste it directly."
   fi
 
   while ! nory "Have you done this yet?"
@@ -259,7 +254,7 @@ fi
 # Test Gerrit setup
 ##############################################################################
 logstep "Verify Gerrit User/SSH Key"
-logmsg "Gerrit Username: [$gerrit_username]"
+echo "Gerrit Username: [$gerrit_username]"
 
 # Make ssh'ing to gerrit a bit easier
 cat << ! > ~/.ssh/config
@@ -272,10 +267,10 @@ Host $gerrit_host gerrit.swgemu.com
 !
 
 if scp -q ${gerrit_host}:hooks/commit-msg /tmp/gerrit_check$$; then
-  logmsg "Looks like gerrit is happy with your userid and your SSH key"
+  echo "Looks like gerrit is happy with your userid and your SSH key"
   rm -f /tmp/gerrit_check$$
 else
-  logmsg "Something is wrong, please make sure you've got your Public SSH setup properly in Gerrit"
+  echo "Something is wrong, please make sure you've got your Public SSH setup properly in Gerrit"
   echo
   echo "Check your internet, your settings, verify everything and try again"
   echo
@@ -299,9 +294,9 @@ cd ~/workspace
 for i in Core3 PublicEngine Tools
 do
   if [ -d $i/.git ]; then
-    logmsg "Repo $i is cloned in ~/workspace/$i"
+    echo "Repo $i is cloned in ~/workspace/$i"
   else
-    logmsg "Cloning $i to ~/workspace/$i"
+    echo "Cloning $i to ~/workspace/$i"
     echo git clone ssh://${gerrit_host}/${i}.git
     git clone ssh://${gerrit_host}/${i}.git
     echo "Install commit-msg hook"
@@ -331,7 +326,7 @@ ln -s PublicEngine/MMOEngine .
 ln -s Core3/MMOCoreORB .
 ls -l MMOCoreORB MMOEngine Core3/MMOEngine | while read f
 do
-  logmsg $f
+  echo $f
      sudo cp /home/swgemu/workspace/MMOEngine/bin/idlc /usr/local/bin
      sudo chmod 755 /usr/local/bin/idlc
 done
@@ -357,7 +352,7 @@ if [ ! -L $englib ]; then
   )
 fi
 
-logmsg "Using engine library: $(readlink $englib)"
+echo "Using engine library: $(readlink $englib)"
 
 
 ##############################################################################
@@ -370,20 +365,20 @@ then
 fi
 
 if mysql -p123456 -NB -e 'show databases'|grep swgemu > /dev/null 2>&1; then
-  logmsg "swgemu database already exists"
+  echo "swgemu database already exists"
   :
 else
-  logmsg "Enter mysql root password"
+  echo "Enter mysql root password"
   createdb swgemu swgemu 123456      # See createdb script in /home/bin
-  logmsg "Restore blank swgemu database to mysql"
+  echo "Restore blank swgemu database to mysql"
   mysql -p123456 -e source -e ~/workspace/Core3/MMOCoreORB/sql/swgemu.sql;
-  logmsg "Enter mysql root password"
+  echo "Enter mysql root password"
   createdb mantis swgemu 123456      # See createdb script in /home/bin
-  logmsg "Restore blank mantis database to mysql"
+  echo "Restore blank mantis database to mysql"
   mysql -p123456 -e source -e ~/workspace/Core3/MMOCoreORB/sql/mantis.sql;
   for sql in ~/workspace/Core3/MMOCoreORB/sql/updates/*.sql
   do
-    logmsg "Runing mysql update: $sql"
+    echo "Runing mysql update: $sql"
     mysql -p123456 swgemu -e source -e $sql
   done
 fi
@@ -397,21 +392,21 @@ rundir=~/run
 runcfg=${rundir}/conf/config.lua
 runsrc=~/workspace/MMOCoreORB/bin/conf/config.lua
 if [ -f $runcfg ]; then
-  logmsg "$runcfg already setup"
+  echo "$runcfg already setup"
 else
   sed -e '/TrePath/s!"[^"]*"!"/home/swgemu/workspace/tre"!' $runsrc > $runcfg
-  logmsg "By default only tatooine and tutorial zones are enabled"
+  echo "By default only tatooine and tutorial zones are enabled"
   if yorn "Would you like to edit the default configuration?"; then
     while :
     do
       $VISUAL $runcfg
-      logmsg "Checking config syntax..."
+      echo "Checking config syntax..."
       if zones=$(cd $rundir;echo 'for k,v in pairs(ZonesEnabled) do io.write(v .. " ") end' | lua -l conf/config); then
-	logmsg "SUCCESS - $runcfg passed lua parser"
-	logmsg "Zones enabled: $zones"
+	echo "SUCCESS - $runcfg passed lua parser"
+	echo "Zones enabled: $zones"
 	break
       else
-	logmsg "You have a syntax error, please fix it before continuing."
+	echo "You have a syntax error, please fix it before continuing."
 	echo -n "Press <ENTER> to edit the config again: "
 	read junk
       fi
@@ -428,7 +423,7 @@ trepath=$(cd $rundir;echo 'print(TrePath)' | lua -l conf/config)
 mkdir -p $trepath > /dev/null 2>&1
 
 if [ -f "${trepath}/patch_sku1_14_00.tre" ]; then
-  logmsg "Looks like your tre files are properly loaded in ${trepath}"
+  echo "Looks like your tre files are properly loaded in ${trepath}"
 else
   ip=`/sbin/ifconfig eth0 | sed -n '/inet addr:/s/.*addr:\([^ ]*\)  .*/\1/p'`
   echo "NOTE: You must make sure to copy all 53 of the *.tre files from your game disk to: $trepath"
@@ -460,22 +455,22 @@ fi
 # TODO ADD MORE INFO
 ##############################################################################
 logstep "Go for it"
-logmsg
-logmsg "Now you should be able to build the server with:"
-logmsg
-logmsg "swgemu build config"
-logmsg
+echo
+echo "Now you should be able to build the server with:"
+echo
+echo "swgemu build config"
+echo
 if [ -f "${trepath}/patch_sku1_14_00.tre" ]; then
-  logmsg "And if that works you can run the server with:"
-  logmsg
-  logmsg "start"
-  logmsg
+  echo "And if that works you can run the server with:"
+  echo
+  echo "start"
+  echo
 else
   # Without the tre file's they can't finish a full build boot, warn them!
-  logmsg "NOTICE: Until you copy your *.tre files to ${trepath} you will not be able to run the server"
+  echo "NOTICE: Until you copy your *.tre files to ${trepath} you will not be able to run the server"
 fi
 
-logmsg "Have fun!"
+echo "Have fun!"
 
 
 logger -t setup "** COMPLETED IN $SECONDS SECOND(S) **"

@@ -65,7 +65,7 @@ fi
 # Edit browser as desired.
 export BROWSER=google-chrome
 
-if [ -x /usr/bin/chromium ]; then
+if [ -x /usr/bin/google-chrome ]; then
   BROWSER=/usr/bin/google-chrome-stable
 fi
 
@@ -104,27 +104,6 @@ if [ "X$MODE" = "Xfresh" -o "X$MODE" = "Xclean" ]; then
     exit 0
   fi
 fi
-
-##############################################################################
-# Choose editor
-##############################################################################
-logstep "Editor"
-# export VISUAL=$(cat ~/.visual 2> /dev/null)
-#
-# while [ ! -n "$VISUAL" ]
-# do
-#   read -p "Would you prefer vim, nano, or gedit to edit files from the command line? vim" ed
-#   case $ed in
-#    [Nn]* ) echo 'nano' > ~/.visual ;;
-#    [Gg][Vv][Ii][Mm] ) echo 'gvim' > ~/.visual ;;
-#    [Gg][Ee][Dd][Ii][Tt] ) echo 'gedit' > ~/.visual ;;
-#    * ) echo 'vim' > ~/.visual ;;
-#   esac
-#
-#   export VISUAL=$(cat ~/.visual 2> /dev/null)
-# done
-
-echo "Editor set to: $VISUAL"
 
 ##############################################################################
 # Setup git user.* config
@@ -462,9 +441,7 @@ echo "swgemu build config"
 echo
 if [ -f "${trepath}/patch_sku1_14_00.tre" ]; then
   echo "And if that works you can run the server with:"
-  echo
   echo "start"
-  echo
 else
   # Without the tre file's they can't finish a full build boot, warn them!
   echo "NOTICE: Until you copy your *.tre files to ${trepath} you will not be able to run the server"
@@ -472,12 +449,11 @@ fi
 
 echo "Have fun!"
 
-
 logger -t setup "** COMPLETED IN $SECONDS SECOND(S) **"
 
 if yorn "Would you like to build and run the server now?"; then
   logger -t setup "start"
-  ~/bin/start
+  ~/DevEnv/bin/start
   exit 0
 fi
 

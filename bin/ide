@@ -36,18 +36,27 @@ tc_rmso=$(tput rmso)
 ################
 # QTCreator
 ################
-if yorn "Would you like to install QTCraetor ?"; then
-	sudo apt-get install qtcreator | tee -a ~/Documents/pkglog.txt
-fi
-
+# if [ -d ~/.file ]; then
+#   echo "Looks like QTCreator is already installed"
+# else
+#   do
+    if yorn "Would you like to install QTCreator ?"; then
+	  sudo apt-get install qtcreator | tee -a ~/Documents/pkglog.txt
+    fi
+#   done
+# fi
 ################
 # Atom
 ################
-if yorn "Would you like to install Atom ?"; then
-	sudo apt-get install gvfs-bin | tee -a ~/Documents/pkglog.txt
-	cd setup
-	wget -O atom-amd64.deb https://atom.io/download/deb
-	sudo dpkg -i atom-amd64.deb | tee -a ~/Documents/pkglog.txt
+if [ -d ~/.atom ]; then
+  echo "Looks like Atom is already installed"
+else
+  if yorn "Would you like to install Atom ?"; then
+	  sudo apt-get -y install gvfs-bin | tee -a ~/Documents/pkglog.txt
+	  cd setup
+	  wget -O atom-amd64.deb https://atom.io/download/deb
+	  sudo dpkg -i atom-amd64.deb | tee -a ~/Documents/pkglog.txt
+  fi
 fi
 
 #################
@@ -71,7 +80,7 @@ if yorn "Would you like to install Eclipse??"; then
     cd ~
     ~/DevEnv/bin/bar $eclipse_base | tar xfz -
     echo "Import eclipse project settings (might take a few minutes)"
-    for i in Core3/MMOCoreORB PublicEngine/MMOEngine Tools/*
+    for i in Core3/MMOCoreORB PublicEngine/MMOEngine Tools/* # Tools/WorldSpawnerTool Tools/AIEditor
     do
       if [ -f ~/workspace/$i/.project ]; then
         echo "Importing $i"
@@ -101,7 +110,7 @@ fi
 ######################
 # cd Downloads
 # TODO test on fresh
-echo TODO run 'reqd' before this. gcc needed.
+# echo TODO run 'reqd' before this. gcc needed.
 if yorn "Would you like to install wxLua ?"; then
 # wget https://raw.githubusercontent.com/pkulchenko/ZeroBraneStudio/master/build/build-linux.sh
   # sudo apt-get install cmake

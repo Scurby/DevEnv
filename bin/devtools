@@ -110,7 +110,7 @@ logstep "Optional packages."
 echo  " The following packages or programs are optional. "
 echo
 echo	" xclip terminator quassel git-cola cmake-gui "
-ech
+echo
 echo	" Add or remove as desired in '~/DevEnv/devtools' "
 echo
 if yorn "Would you like to install the optional packages now??"; then

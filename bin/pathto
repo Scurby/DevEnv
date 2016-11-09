@@ -1,0 +1,3 @@
+# Added to .bashrc by swgemu devenv scripts
+PATH=$PATH:$HOME/DevEnv/bin
+export PATH

@@ -7,7 +7,13 @@
 # Created: Mar 4 2015
 # TODO quiet the apt commands
 
-logger -t options "** OPTIONS **"
+
+ exec 3>&1 4>&2
+ trap 'exec 2>&4 1>&3' 0 1 2 3
+ exec 1>pkglog.out 2>&1
+# Everything below will go to the file 'pkglog.out':
+
+logger -t options "** DEVTOOLS **"
 
 ##############################################################################
 # Common functions and setup
@@ -35,36 +41,44 @@ tc_rmso=$(tput rmso)
 #################
 #Dropbox install
 #################
-# if [ ! "$(which g++)" ]; then
-#   echo "Error: g++ isn't found. Please install GNU C++ compiler."
-#   exit 1
-# fi
 logstep "Dropbox"
-if yorn "Would you like to install Dropbox??"; then
+if [ -f .dropboxd ]; then
+  echo "Dropbox already installed. Starting sync.."
+  ~/.dropbox-dist/dropboxd & disown
+  else
+    if yorn "Would you like to install Dropbox??"; then
       cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
       ~/.dropbox-dist/dropboxd & disown
+    fi
 fi
-
 ################
 # Atom
 ################
- if yorn "Would you like to install Atom ?"; then
- 	sudo apt-get -y install gvfs-bin
+logstep "Atom"
+if [ -d .atom ]; then
+  echo "Atom is installed."
+  else
+    if yorn "Would you like to install Atom ?"; then
+ 	sudo apt-get -y -q install gvfs-bin
  	cd setup
  	wget -O atom-amd64.deb https://atom.io/download/deb
  	sudo dpkg -i atom-amd64.deb
- fi
-
+    fi
+fi
 ################
 # Google Chrome
 ################
+logstep "Chrome"
+# if [ -d google-chrome-stable ]; then
+#   echo "Chrome is installed."
+#   else
 if yorn "Would you like to install Google Chrome?"; then
       wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
       sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
       sudo apt-get -y update
       sudo apt-get -y install google-chrome-stable
 fi
-
+# fi
 ################
 # Editor
 ################
@@ -89,21 +103,21 @@ echo "Editor set to: $VISUAL"
 
 
 #################
-# Recommended packages
+# Optional packages
 # xclip terminator vim chromium quassel git-cola etc...
 #################
 logstep "Optional packages."
 echo  " The following packages or programs are optional. "
 echo
-echo	" xclip terminator quassel git-cola. "
-echo
-echo	" Add or remove as desired in '/home/bin/devtools' "
+echo	" xclip terminator quassel git-cola cmake-gui "
+ech
+echo	" Add or remove as desired in '~/DevEnv/devtools' "
 echo
 if yorn "Would you like to install the optional packages now??"; then
   for i in xclip terminator quassel git-cola cmake-gui
     do
       echo " Installing ${i} ... "
-      sudo apt-get -y install ${i} | tee -a ~/Documents/pkglog.txt
+      sudo apt-get -y -q install ${i}
     done
 fi
 
@@ -112,7 +126,7 @@ fi
 ######################
 	# TODO remove tarballs
 logstep "Finalizing install"
-#  sudo apt-get -y update &>> ~/Documents/pkglog.txt
+  sudo apt-get -y -q update
   echo
   echo "Thanks for the fish...  "
   echo

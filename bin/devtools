@@ -42,9 +42,9 @@ tc_rmso=$(tput rmso)
 #Dropbox install
 #################
 logstep "Dropbox"
-if [ -f .dropboxd ]; then
-  echo "Dropbox already installed. Starting sync.."
-  ~/.dropbox-dist/dropboxd & disown
+if [ -d .dropbox-dist ]; then
+  echo "Dropbox already installed." # Starting sync..
+#  ~/.dropbox-dist/dropboxd & disown
   else
     if yorn "Would you like to install Dropbox??"; then
       cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
@@ -69,16 +69,16 @@ fi
 # Google Chrome
 ################
 logstep "Chrome"
-# if [ -d google-chrome-stable ]; then
-#   echo "Chrome is installed."
-#   else
-if yorn "Would you like to install Google Chrome?"; then
+ if [ -f /usr/bin/google-chrome-stable ]; then
+   echo "Chrome is installed."
+   else
+    if yorn "Would you like to install Google Chrome?"; then
       wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
       sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
       sudo apt-get -y update
       sudo apt-get -y install google-chrome-stable
-fi
-# fi
+    fi
+ fi
 ################
 # Editor
 ################

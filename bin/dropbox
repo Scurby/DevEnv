@@ -7,6 +7,13 @@ echo "Installing dropbox"
 echo "Sources:"
 echo "https://www.dropbox.com/install?os=linux"
 
-cd
-wget -O - "https://www.dropbox.com/download?plat=lnx.x86"|tar xzf -
-~/.dropbox-dist/dropboxd && disown
+if [ -d .dropbox-dist ]; then
+  echo "Dropbox already installed."
+# Starting sync..
+#  ~/.dropbox-dist/dropboxd & disown
+  else
+    if yorn "Would you like to install Dropbox??"; then
+      cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+      ~/.dropbox-dist/dropboxd & disown
+    fi
+fi

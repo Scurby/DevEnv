@@ -43,8 +43,7 @@ tc_rmso=$(tput rmso)
 #################
 logstep "Dropbox"
 if [ -d .dropbox-dist ]; then
-  echo "Dropbox already installed." # Starting sync..
-#  ~/.dropbox-dist/dropboxd & disown
+  echo "Dropbox already installed."
   else
     if yorn "Would you like to install Dropbox??"; then
       cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
@@ -80,7 +79,7 @@ logstep "Chrome"
     fi
  fi
 ################
-# Editor
+# Editor Selection
 ################
 logstep "Editor"
 export VISUAL=$(cat ~/.visual 2> /dev/null)

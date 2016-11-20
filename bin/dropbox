@@ -3,14 +3,20 @@
 # Headless Dropbox Install
 #
 
-echo "Installing dropbox"
+echo "Dropbox"
 echo "Sources:"
 echo "https://www.dropbox.com/install?os=linux"
 
+<<<<<<< Updated upstream
 if [ -d .dropbox-dist ]; then
   echo "Dropbox already installed."
 # Starting sync..
 #  ~/.dropbox-dist/dropboxd & disown
+=======
+cd
+if [ -d .dropbox-dist ]; then
+  echo "Dropbox already installed."
+>>>>>>> Stashed changes
   else
     if yorn "Would you like to install Dropbox??"; then
       cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -

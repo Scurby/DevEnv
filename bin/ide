@@ -36,15 +36,14 @@ tc_rmso=$(tput rmso)
 ################
 # QTCreator
 ################
-# if [ -d ~/.file ]; then
-#   echo "Looks like QTCreator is already installed"
-# else
-#   do
+logstep "QT Creator"
+if [ -f /usr/bin/qtcreator ]; then
+  echo "Looks like QTCreator is already installed"
+  else
     if yorn "Would you like to install QTCreator ?"; then
 	  sudo apt-get install qtcreator | tee -a ~/Documents/pkglog.txt
     fi
-#   done
-# fi
+fi
 ################
 # Atom
 ################

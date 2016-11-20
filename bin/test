@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# testdate - test for date
+#
+# Author: Scurby <scurby@swgemu.com>
+#
+# Created: Thu Nov 10 22:11:53 EST 2016
+
+today=`date '+%c'`;
+# filename="/home/$USER/myfile/$today.whatever"
+echo $today;

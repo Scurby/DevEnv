@@ -11,7 +11,7 @@ VirtualBox, VMWare, or native install.
 	max cores
 	bridged network
 
-# Install Debian 64bit Desktop OS
+# Install Debian 8.x 64bit Desktop OS (Not working for deb 9)
 (or variant)
 * Debian - https://www.debian.org/
 * pointLinux - http://pointlinux.org/

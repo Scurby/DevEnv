@@ -61,7 +61,7 @@ fi
 ###########################################################################
 # Setup git user.* config
 ###########################################################################
-logstep "Git config"
+echo "Git config"
 email_address=$(git config --get user.email)
 
 if [ ! -n "$email_address" ]; then
@@ -222,20 +222,20 @@ fi
 # TODO Edit tre path as needed
 ##############################################################################
 echo "Server configuration"
-rundir=~/run
-runcfg=${rundir}/conf/config.lua
+rundir=~/DevEnv/run/
+runcfg=${rundir}conf/config.lua
 runsrc=~/workspace/MMOCoreORB/bin/conf/config.lua
 if [ -f $runcfg ]; then
   echo "$runcfg already setup"
 else
-  sed -e '/TrePath/s!"[^"]*"!"/home/swgemu/workspace/tre"!' $runsrc > $runcfg
+  sed -e '/TrePath/s!"[^"]*"!"/home/scurby/workspace/tre"!' $runsrc > $runcfg
   echo "By default only tatooine and tutorial zones are enabled"
   if yorn "Would you like to edit the default configuration?"; then
     while :
     do
       kate $runcfg
       echo "Checking config syntax..."
-      if zones=$(cd $rundir;echo 'for k,v in pairs(ZonesEnabled) do io.write(v .. " ") end' | lua -l conf/config); then
+      if zones=$(cd $rundir;echo 'for k,v in pairs(ZonesEnabled) do io.write(v .. " ") end' | lua -l DevEnv/conf/config); then
 	echo "SUCCESS - $runcfg passed lua parser"
 	echo "Zones enabled: $zones"
 	break
@@ -259,7 +259,7 @@ mkdir -p $trepath > /dev/null 2>&1
 if [ -f "${trepath}/patch_sku1_14_00.tre" ]; then
   echo "Looks like your tre files are properly loaded in ${trepath}"
 else
-  ip=`/sbin/ifconfig eth0 | sed -n '/inet addr:/s/.*addr:\([^ ]*\)  .*/\1/p'`
+  #ip=`/sbin/ifconfig eth0 | sed -n '/inet addr:/s/.*addr:\([^ ]*\)  .*/\1/p'`
   echo "NOTE: You must make sure to copy all 53 of the *.tre files from your game disk to: $trepath"
   echo
   echo "EXAMPLE (on OSX box):"

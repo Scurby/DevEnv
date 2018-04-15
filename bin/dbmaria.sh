@@ -13,11 +13,11 @@ if mysql -p1234 -NB -e 'show databases'|grep swgemu > /dev/null 2>&1; then
   :
 else
   echo "Enter mysql root password"
-  createdb swgemu scurby 123456      # See createdb script in /home/bin
+  createdb swgemu scurby 1234      # See createdb script in /home/bin
   echo "Restore blank swgemu database to mysql"
   mysql -p1234 -e source -e ~/workspace/Core3/MMOCoreORB/sql/swgemu.sql;
   echo "Enter mysql root password"
-  createdb mantis scurby 123456      # See createdb script in /home/bin
+  createdb mantis scurby 1234      # See createdb script in /home/bin
   echo "Restore blank mantis database to mysql"
   mysql -p1234 -e source -e ~/workspace/Core3/MMOCoreORB/sql/mantis.sql;
   for sql in ~/workspace/Core3/MMOCoreORB/sql/updates/*.sql

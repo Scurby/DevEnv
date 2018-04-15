@@ -46,7 +46,7 @@ MakeLogin = 1
 MakeZone = 1
 MakePing = 1
 MakeStatus = 1
-MakeWeb = 0
+MakeWeb = 1
 
 ORB = ""
 ORBPort = 44419

@@ -3,7 +3,7 @@
 # start2
 #
 if [ ! -d ~/workspace/MMOCoreORB/bin ]; then
-  echo "** No bin dir? Did you run: 'start' yet?"
+  echo "** No bin dir? Did you run: 'setup' yet?"
   echo "**ABORT**"
   exit 2
 fi

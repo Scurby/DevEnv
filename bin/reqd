@@ -43,7 +43,7 @@ echo  " The following packages or programs are required. Be prepared to enter pa
 echo
 cd
 if yorn "Would you like to install the required packages now??"; then
-  for i in gcc g++ make autoconf automake autotools-dev git libc6-dev libdb5.3-dev libreadline-dev default-libmysqlclient-dev libssl-dev git vim openjdk-8-jre-headless gdb gccxml mysql-server mysql-workbench
+  for i in gcc g++ make autoconf automake autotools-dev git libc6-dev libdb5.3-dev libreadline-dev default-libmysqlclient-dev libssl-dev git vim openjdk-8-jre-headless gdb mysql-server mysql-workbench
 
       do
         echo " Installing ${i} ... " | tee -a ~/Documents/pkglog.txt
@@ -60,12 +60,13 @@ fi
 #################
 logstep "Lua 5.3.3 Install"
 
-dir=~/setup/
-lua_base=~/setup/lua-5.3.3.tar.gz
+dir=~/DevEnv/setup/
+lua_base=~/DevEnv/setup/lua-5.3.3.tar.gz
 lua_ins=/usr/local/bin/lua
 
 if [ -f $lua_ins ]; then
  echo "Great, looks like you have Lua installed.!"
+ lua -v
   else
     while ! yorn "Would you like to install Lua 5.3.3 now??"
       do
@@ -80,20 +81,20 @@ if [ -f $lua_ins ]; then
   echo
   echo "Restoring basic lua install from $lua_base"
   echo
-  for dir in ~/setup/
+  for dir in ~/DevEnv/setup/
     do
       cd $dir
-      tar xzf ~/setup/lua-5.3.3.tar.gz | tee -a ~/Documents/pkglog.txt
+      tar xzf ~/DevEnv/setup/lua-5.3.3.tar.gz | tee -a ~/Documents/pkglog.txt
       cd lua-5.3.3
       sudo make linux install | tee -a ~/Documents/pkglog.txt
       sudo make test | tee -a ~/Documents/pkglog.txt
       cd
     done
-# TODO add check here
   echo
-  echo "You have successfully installed Lua if you see 'Hello world, from Lua 5.3!' in the terminal."
+  echo "You have successfully installed Lua if you see 'Lua 5.3.3  Copyright (C) 1994-2016 Lua.org, PUC-Rio' in the terminal."
   echo
 fi
+  lua -v
 
 
 ##############################################################################
@@ -129,7 +130,7 @@ sudo apt-get update -y | tee -a ~/Documents/pkglog.txt
 sudo service mysql start
 cd $dir
 rm lua-5.3.3.tar.gz
-rm -rf lua-5.3.3
+# rm -rf lua-5.3.3
 echo
 echo "Run the 'reqd' script at any time to check installation of required packages."
 echo

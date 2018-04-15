@@ -30,15 +30,11 @@ VirtualBox, VMWare, or native install.
 	(*)Print Server
 	(*)Standard System Utilities
 
-#### Config sudoer as needed
-
-https://www.digitalocean.com/community/tutorials/how-to-add-delete-and-grant-sudo-privileges-to-users-on-a-debian-vps
-
 # Import scripts
 
 Copy this series of commands into a terminal: Installs git, downloads scripts and installs them.
 
-	sudo apt-get update && sudo apt-get install -y -q git && git clone https://github.com/Scurby/DevEnv.git && cp -i /home/swgemu/DevEnv/README.md /home/swgemu/Documents && mkdir setup && cp -i /home/swgemu/DevEnv/setup/* /home/swgemu/setup/ && mkdir run && cp -r /home/swgemu/DevEnv/run/* /home/swgemu/run/ && chmod -v +x /home/swgemu/DevEnv/bin/* && cat ~/DevEnv/bin/pathto &>> ~/.bashrc
+	sudo apt-get update && sudo apt-get install -y -q git && git clone https://github.com/Scurby/DevEnv.git && cp -i ~/DevEnv/README.md ~/Documents && mkdir setup && cp -i ~/setup/* ~/setup/ && mkdir run && cp -r ~/DevEnv/run/* ~/run/ && chmod -v +x ~/DevEnv/bin/* && cat ~/DevEnv/bin/pathto &>> ~/.bashrc
 
 ## Run setup scripts
 
@@ -48,13 +44,9 @@ The following scripts are run from the command line. They are numbered in the or
 2. setup - Setup of development environment follows these steps:
    * Choose editor
    * Setup git user.* config
-   * Setup ssh key
-   * Register on gerrit
-   * Test Gerrit setup
    * Clone repos and checkout a local branch of Core3 origin/unstable
    * Symlinks (idlc)
    * Engine library
-   * MySQL database checks
    * Server configuration
    * Tre files (They will need to be copied or moved)
    * Asks if you want to build and run the server.
@@ -66,8 +58,8 @@ The following scripts are run from the command line. They are numbered in the or
    * outputs a screenlog to ~/run/screenlog*
    * use the config.lua in ~/run/conf/ to replace the config.lua in ~/MMOCoreORB/bin/conf.
    * uses gdb in batch mode and starts with the commands  in ~/run/run_gdb which you can change to your pleasing; (breakpoints, dumps, settings etc.)
-5. devtools - Installs Optional packages including xclip, vim, quassel, and others.
-6. ide - Installs IDE. QTCreator - Atom - wxLua - Eclipse mars, imports project and sets git team properties.
+5. devtools - Installs Optional packages including xclip, vim, and others.
+6. ide - Installs IDE. QTCreator - Atom - Eclipse mars, imports project and sets git team properties.
    * (Requires Egit-properties.tar.gz in /home/setup/ )
 7. latest - do a quick git-stash, git-pull, and git-stash-apply so you can get to the latest code w/o loosing local work.
 
@@ -75,7 +67,6 @@ The following scripts are run from the command line. They are numbered in the or
 * ack - Nice source grep tool (try: cd ~/workspace/MMOCoreORB/src; ack PlanetManager).
 * freeze - Save your devenv state so you can repeat the same tests over and over.
 * thaw - allow server to continue from previous state each time you run it.
-* extras - Installs EXTRA packages.
 * cleanup_for_publish - Strips virtual machine down for distribution, creates version number, resets pwds, etc. **USE WITH CAUTION!!!**
 * createdb - mysql table, user, and pwd tool.
   * Ref: (http://jetpackweb.com/blog/2009/07/20/bash-script-to-create-mysql-database-and-user/)

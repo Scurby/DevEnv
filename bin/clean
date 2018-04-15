@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+
+# if [ "X$MODE" = "Xfresh" -o "X$MODE" = "Xclean" ]; then
+  echo "Starting clean" ;
+  export HISTSIZE=0
+  rm -fr ~/new_run
+  mkdir ~/new_run
+  mv ~/run/run_gdb ~/new_run
+  mkdir ~/new_run/conf
+  rm -fr ~/.visual ~/run ~/tmp ~/.viminfo ~/.mysql_history ~/.xsession*
+  rm -fr ~/.gitconfig ~/.lesshst ~/.ssh/*
+  rm -fr ~/workspace
+  mv ~/new_run ~/run
+  mkdir ~/tmp
+  mysql -e 'drop database swgemu' > /dev/null 2>&1 ;
+  # Everything gone? Your virtual machine is ready to share.
+  # Done if all we needed to do was clean
+#   if [ "X$MODE" = "Xclean" ]; then
+#     echo "Done $MODE" ;
+#     exit 0
+#   fi
+# fi

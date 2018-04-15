@@ -36,13 +36,15 @@ tc_rmso=$(tput rmso)
 #################
 # Required packages
 #################
+#RUN apt-get install -y gcc g++ make autoconf automake autotools-dev git libc6-dev libdb5.3-dev libreadline-dev libmysqlclient-dev libssl-dev git vim openjdk-7-jre-headless gdb gccxml mysql-server
 logstep "Required packages."
 
 echo  " The following packages or programs are required. Be prepared to enter password for sudo."
 echo
 cd
 if yorn "Would you like to install the required packages now??"; then
-  for i in libdb5.3-dev wget autoconf automake autotools-dev g++ gcc gccxml gdb libc6-dev libdb-dev libtool make screen xclip libreadline-gplv2-dev libncurses5-dev libneon27 libaprutil1-dev openjdk-7-jre openjdk-7-jre-headless libgtest-dev libssl-dev liblua5.1-0-dev
+  for i in gcc g++ make autoconf automake autotools-dev git libc6-dev libdb5.3-dev libreadline-dev default-libmysqlclient-dev libssl-dev git vim openjdk-8-jre-headless gdb gccxml mysql-server mysql-workbench
+
       do
         echo " Installing ${i} ... " | tee -a ~/Documents/pkglog.txt
         sudo apt-get -y install ${i} | tee -a ~/Documents/pkglog.txt
@@ -93,41 +95,29 @@ if [ -f $lua_ins ]; then
   echo
 fi
 
- if [ -f $lua_ins ]; then
-  echo "Great, looks like you have Lua installed.!"
-   else
-     while ! yorn "Would you like to install Lua 5.3.3 now??"
-       do
-         echo "You need to do it before you can build and run the server. (cntl+c to exit)"
-         sleep 1
-       done
-fi
 
 ##############################################################################
 # MySQL Install
 ##############################################################################
-logstep "MySQL Install"
-
-mysql_pkg=/usr/share/mysql/mysql_system_tables.sql
-if [ -f $mysql_pkg ]; then
-  echo "Looks like MySQL is installed!"
-else
-  while ! yorn "Would you like to install MySQL now??"
-    do
-      echo "You need to do it before you can build and run the server. (cntl+c to exit)"
-      sleep 1
-    done
-    echo " $mysql_pkg not found. "
-    echo " "
-    echo " Installing MySQL... "
-    echo " "
-  cd
-    for i in mysql-server-core-5.5 mysql-server-5.5 mysql-workbench libmysqlclient-dev
-      do
-        echo " Installing ${i} ... "
-        sudo apt-get install ${i} | tee -a ~/Documents/pkglog.txt
-      done
-fi
+#if [ -f $mysql_pkg ]; then
+#   echo "Looks like MySQL is installed!"
+# else
+#   while ! yorn "Would you like to install MySQL now??"
+#     do
+#       echo "You need to do it before you can build and run the server. (cntl+c to exit)"
+#       sleep 1
+#     done
+#     echo " $mysql_pkg not found. "
+#     echo " "
+#     echo " Installing MySQL... "
+#     echo " "
+#   cd
+#     for i in mysql-server-core-5.5 mysql-server-5.5 mysql-workbench libmysqlclient-dev
+#       do
+#         echo " Installing ${i} ... "
+#         sudo apt-get install ${i} | tee -a ~/Documents/pkglog.txt
+#       done
+#fi
 
 ######################
 # Remove un-needed files
@@ -135,7 +125,7 @@ fi
 logstep "Finalizing install and removing un-needed files."
 
 sudo apt-get update -y | tee -a ~/Documents/pkglog.txt
-sudo apt-get autoremove -y | tee -a ~/Documents/pkglog.txt
+# sudo apt-get autoremove -y | tee -a ~/Documents/pkglog.txt
 sudo service mysql start
 cd $dir
 rm lua-5.3.3.tar.gz

@@ -47,7 +47,7 @@ if [ -d .dropbox-dist ]; then
   else
     if yorn "Would you like to install Dropbox??"; then
       cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
-      ~/.dropbox-dist/dropboxd & disown
+      ~/.dropbox-dist/dropboxd & disown -a
     fi
 fi
 ################
@@ -68,14 +68,12 @@ fi
 # Google Chrome
 ################
 logstep "Chrome"
- if [ -f /usr/bin/google-chrome-stable ]; then
+ if [ -f /usr/bin/google-chrome-stable_current_amd64 ]; then
    echo "Chrome is installed."
    else
-    if yorn "Would you like to install Google Chrome?"; then
-      wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-      sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-      sudo apt-get -y update
-      sudo apt-get -y install google-chrome-stable
+    if yorn "Would you like to install Chrome?"; then
+      wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      sudo dpkg -i google-chrome-stable_current_amd64.deb
     fi
  fi
 ################
@@ -90,7 +88,7 @@ do
   case $ed in
    [Aa]* ) echo 'atom' > ~/.visual ;;
    [Nn]* ) echo 'nano' > ~/.visual ;;
-   [Gg]* ) echo 'gedit' > ~/.visual ;;
+   [Kk]* ) echo 'kate' > ~/.visual ;;
    [Vv]* ) echo 'vim' > ~/.visual ;;
   esac
 sudo apt-get -y -q install $ed
@@ -126,6 +124,7 @@ fi
 	# TODO remove tarballs
 logstep "Finalizing install"
   sudo apt-get -y -q update
+#  Sudo apt-get autoremove
   echo
   echo "Thanks for the fish...  "
   echo

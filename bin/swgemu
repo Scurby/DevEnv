@@ -7,7 +7,7 @@ EXTRA=$1
 
 case $EXTRA in
   devtools ) ./devtools ;;
-  install ) ./install ;;
+  reqd ) ./reqd ;;
   setup ) ./setup ;;
   start ) ./start ;;
 #  stop )

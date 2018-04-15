@@ -11,7 +11,7 @@ cd ~/Documents
   java -version 2>&1 &>> ~/Documents/installed.txt
   echo "***   LUA   ***" &>> ~/Documents/installed.txt
   lua -v 2>&1 &>> ~/Documents/installed.txt
-    for i in atom gedit nano vim xclip terminator quassel automake bash g++ gcc gdb libtool make mysql db5.3 libncurses5-dev libneon27 libaprutil1-dev  libgtest-dev
+    for i in atom nano vim xclip terminator quassel automake bash g++ gcc gdb libtool make mysql db5.3 libncurses5-dev libneon27 libaprutil1-dev  libgtest-dev
       do
         echo " " &>> ~/Documents/installed.txt
         echo " ${i} "

@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+# db update
+
+for sql in ~/workspace/Core3/MMOCoreORB/sql/updates/*.sql
+  do
+    echo "Runing mysql update: $sql"
+    mysql -p1234 swgemu -e source -e $sql
+  done

@@ -8,4 +8,4 @@
 #
 # Run after first acct is created. Only applies to `account_id`='1'
 # TODO Make configurable for acct and level and pw
-mysql -p123456 -e UPDATE `swgemu`.`accounts` SET `admin_level`=15 WHERE `account_id`='1';
+mysql -p1234 -e UPDATE `swgemu`.`accounts` SET `admin_level`=15 WHERE `account_id`='1';

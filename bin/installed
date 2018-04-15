@@ -17,6 +17,7 @@ cd ~/Documents
         echo " ${i} "
         echo "***   ${i}   ***" &>> ~/Documents/installed.txt
         dpkg -l | grep ${i} | grep ii &>> ~/Documents/installed.txt
+        sudo apt list --installed &>> ~/Documents/installed.txt
       done
   echo " See ~/Documents/installed.txt"
 exit 0

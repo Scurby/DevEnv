@@ -17,14 +17,14 @@ if SERVER_PID=$(pgrep core3); then
   exit 0
 fi
 
-echo "Frozen at: $(date)" > ~/run/freeze.txt
+echo "Frozen at: $(date)" > ~/DevEnv/run/freeze.txt
 echo "** backup mysql database **"
 
 mv ~/run/mysqldump.sql.gz ~/run/prev-mysqldump.sql.gz > /dev/null 2>&1
-mysqldump --opt swgemu | gzip > ~/run/mysqldump.sql.gz
+mysqldump --opt swgemu | gzip > ~/DevEnv/run/mysqldump.sql.gz
 echo "** backup object database **"
 cd ~/workspace/MMOCoreORB/bin
-mv ~/run/backup.tar.gz ~/run/prev-backup.tar.gz > /dev/null 2>&1
-tar cvfz ~/run/backup.tar.gz databases
+mv ~/DevEnv/run/backup.tar.gz ~/DevEnv/run/prev-backup.tar.gz > /dev/null 2>&1
+tar cvfz ~/DevEnv/run/backup.tar.gz databases
 echo "** Future runs of run_dev will restore the server to this point in time until you run 'thaw'"
 exit 0

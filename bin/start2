@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+# start2
+#
+if [ ! -d ~/workspace/MMOCoreORB/bin ]; then
+  echo "** No bin dir? Did you run: 'start' yet?"
+  echo "**ABORT**"
+  exit 2
+fi
+
+if SERVER_PID=$(pgrep core3); then
+  echo "** Server appears to be running as pid $SERVER_PID **"
+  echo ""
+  echo " Server shutdown = shutdown "
+  echo -e "** Want me to try: screen -x -r to join the console? Y\b\c"
+  read yorn
+  case $yorn in
+    [nn]* )  exit 0;;
+  esac
+  screen -x -r
+  exit 0
+fi
+
+cd ~/workspace/MMOCoreORB/bin
+
+exec screen gdb -x ~/DevEnv/run/rgdb ./core3

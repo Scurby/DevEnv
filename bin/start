@@ -6,12 +6,16 @@
 #
 # Created: Sun Apr 21 14:25:10 UTC 2013
 #
+
+# Do we have a bin?
 if [ ! -d ~/workspace/MMOCoreORB/bin ]; then
   echo "** No bin dir? Did you run: 'setup' yet?"
   echo "**ABORT**"
   exit 2
 fi
 
+
+# Is the server running?
 if SERVER_PID=$(pgrep core3); then
   echo "** Server appears to be running as pid $SERVER_PID **"
   echo ""
@@ -33,10 +37,10 @@ if [ -f 'screenlog.0' ]; then
   for i in 5 4 3 2 1
   do
     let "j=$i-1"
-    mv ~/run/o_screenlog-$j.gz ~/run/o_screenlog-$i.gz 2> /dev/null
+    mv ~/DevEnv/run/o_screenlog-$j.gz ~/DevEnv/run/o_screenlog-$i.gz 2> /dev/null
   done
 
-  mv screenlog.0 ~/run/o_screenlog-0 2> /dev/null
+  mv screenlog.0 ~/DevEnv/run/o_screenlog-0 2> /dev/null
   gzip -f ~/run/o_screenlog-0 &
 fi
 
@@ -73,27 +77,18 @@ export ERRFILE="/tmp/run_dev$$"
   fi
 
   # Do we have a pre-made config file?
-  # TODO test
   if [ -f ~/DevEnv/run/conf/config.lua ]; then
-      echo "** Using ~/run/conf/config.lua"
+      echo "** Using ~/DevEnv/run/conf/config.lua"
       cp -v ~/DevEnv/run/conf/config.lua conf/
   fi
-
+  
+  # Are all the tres loaded?
   trepath=$(echo ' print(TrePath)' | lua -l conf/config)
-
   if [ ! -f "${trepath}/patch_sku1_14_00.tre" ]; then
     echo "ERROR: Before running the server you must copy all the *.tre files from your game disk to: $trepath" > $ERRFILE
     exit 1
   fi
 
-  # default to hostname as the galaxy name
-#  name=$(hostname -s)
-
-  # Setup ports based on PingPort in config
-#  ports=$(echo 'print(string.format("pingport=%d, port=%d\n", PingPort, PingPort+1))' | lua -l 'conf/config' -)
-
-#  mysql -p1234 swgemu -v -e "update galaxy set name = '$name', $ports;"
-#  ~/DevEnv/bin/updateip
   echo "$0 STARTING SERVER UNDER GDB"
 ) 2>&1 | tee screenlog.0
 
@@ -103,11 +98,8 @@ if [ -f $ERRFILE ]; then
   cat $ERRFILE
   echo "**ABORT**"
   rm -f $ERRFILE
-  if [ -n "$RUNDEV_AUTO" ]; then
-    read -p "Press <ENTER> to exit: "
-  fi
   exit 1
 fi
 
 # Everthing looks good, run under gdb on a screen
-exec screen gdb -x ~/DevEnv/run/rgdb ./core3
+exec screen -L ~/workspace/MMOCoreORB/bin/screenlog.0 gdb -x ~/DevEnv/run/rgdb ./core3

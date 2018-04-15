@@ -23,4 +23,4 @@ fi
 
 cd ~/workspace/MMOCoreORB/bin
 
-exec screen gdb -x ~/DevEnv/run/rgdb ./core3
+exec screen -L ~/workspace/MMOCoreORB/bin/screenlog.0 gdb -x ~/DevEnv/run/rgdb ./core3

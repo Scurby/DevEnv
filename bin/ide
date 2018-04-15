@@ -21,18 +21,6 @@ yorn() {
   return 0
 }
 
-logstep() {
-  let "step=$step + 1"
-  echo ${tc_smso}$(head -c $(tput cols) < /dev/zero | tr '\0' '*')${tc_rmso}
-  echo "${tc_smso}**${tc_rmso} STEP $step >> $*"
-  logger -t options "STEP $step >> $*"
-}
-
-step=0
-tc_smso=$(tput smso)
-tc_rmso=$(tput rmso)
-
-
 ################
 # QTCreator
 ################
@@ -105,31 +93,11 @@ if yorn "Would you like to install Eclipse??"; then
 fi
 
 ######################
-# wxLua wxWidgets
-######################
-# cd Downloads
-# TODO test on fresh
-# echo TODO run 'reqd' before this. gcc needed.
-if yorn "Would you like to install wxLua ?"; then
-# wget https://raw.githubusercontent.com/pkulchenko/ZeroBraneStudio/master/build/build-linux.sh
-  # sudo apt-get install cmake
-  # sudo apt-get install libwxgtk3.0-dev  | tee -a ~/Documents/lualog.txt
-  # sudo apt-get install libgtk-3-dev | tee -a ~/Documents/lualog.txt
-  # sudo apt-get install gtk+-2.0 | tee -a ~/Documents/lualog.txt
-  sudo ~/DevEnv/bin/wxDeb | tee -a ~/Documents/lualog.txt
-  sudo ~/DevEnv/bin/wxLuainstall 5.3 | tee -a ~/Documents/lualog.txt
-  sudo ~/DevEnv/bin/wxLuainstall jit | tee -a ~/Documents/lualog.txt
-  sudo ~/DevEnv/bin/wxLuainstall wxwidgets | tee -a ~/Documents/lualog.txt
-  sudo ~/DevEnv/bin/wxLuainstall lua | tee -a ~/Documents/lualog.txt
-  sudo ~/DevEnv/bin/wxLuainstall wxlua | tee -a ~/Documents/lualog.txt
-fi
-
-######################
 # Remove un-needed files
 ######################
 	# TODO remove tarballs
 logstep "Finalizing install"
-#  sudo apt-get -y update | tee -a ~/Documents/pkglog.txt
+  sudo apt-get -y update | tee -a ~/Documents/pkglog.txt
   echo
   echo "Thanks for the fish...  "
   echo

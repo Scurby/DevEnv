@@ -3,4 +3,4 @@
 # Unit Tests
 
 cd ~/workspace/MMOCoreORB/bin
-./core3 RunUnitTests 
+./core3 runUnitTests 

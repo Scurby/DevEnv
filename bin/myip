@@ -12,7 +12,7 @@ if [ ! -n "$ip_address" ]; then
   echo "** Failed to determine ip address!? **"
 fi
 
-cd ~/run
+cd ~/DevEnv/run
 port=$(echo 'print(LoginPort)' | lua -l 'conf/config' -)
 
 echo "Server ip : $ip_address"

@@ -27,33 +27,16 @@ yorn() {
   return 0
 }
 
-logstep() {
-  let "step=$step + 1"
-  echo ${tc_smso}$(head -c $(tput cols) < /dev/zero | tr '\0' '*')${tc_rmso}
-  echo "${tc_smso}**${tc_rmso} STEP $step >> $*"
-  logger -t options "STEP $step >> $*"
-}
-
-step=0
-tc_smso=$(tput smso)
-tc_rmso=$(tput rmso)
-
 #################
 #Dropbox install
 #################
-logstep "Dropbox"
-if [ -d .dropbox-dist ]; then
-  echo "Dropbox already installed."
-  else
-    if yorn "Would you like to install Dropbox??"; then
-      cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
-      ~/.dropbox-dist/dropboxd & disown -a
-    fi
-fi
+
+~/DevEnv/bin/dropbox
+
 ################
 # Atom
 ################
-logstep "Atom"
+echo "Atom"
 if [ -d .atom ]; then
   echo "Atom is installed."
   else
@@ -67,7 +50,7 @@ fi
 ################
 # Google Chrome
 ################
-logstep "Chrome"
+echo "Chrome"
  if [ -f /usr/bin/google-chrome-stable_current_amd64 ]; then
    echo "Chrome is installed."
    else
@@ -79,7 +62,7 @@ logstep "Chrome"
 ################
 # Editor Selection
 ################
-logstep "Editor"
+echo "Editor"
 export VISUAL=$(cat ~/.visual 2> /dev/null)
 
 while [ ! -n "$VISUAL" ]
@@ -101,20 +84,20 @@ echo "Editor set to: $VISUAL"
 
 #################
 # Optional packages
-# xclip terminator vim chromium quassel git-cola etc...
+# xclip terminator vim chromium git-cola etc...
 #################
 logstep "Optional packages."
 echo  " The following packages or programs are optional. "
 echo
-echo	" xclip terminator quassel git-cola cmake-gui "
+echo	" xclip terminator git-cola "
 echo
 echo	" Add or remove as desired in '~/DevEnv/devtools' "
 echo
 if yorn "Would you like to install the optional packages now??"; then
-  for i in xclip terminator quassel git-cola cmake-gui
+  for i in xclip terminator git-cola
     do
       echo " Installing ${i} ... "
-      sudo apt-get -y -q install ${i}
+      sudo apt-get -y install ${i}
     done
 fi
 
@@ -124,7 +107,6 @@ fi
 	# TODO remove tarballs
 logstep "Finalizing install"
   sudo apt-get -y -q update
-#  Sudo apt-get autoremove
   echo
   echo "Thanks for the fish...  "
   echo

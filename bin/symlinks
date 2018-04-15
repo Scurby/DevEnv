@@ -12,6 +12,6 @@ ln -s Core3/MMOCoreORB .
 ls -l MMOCoreORB MMOEngine Core3/MMOEngine | while read f
 do
   echo $f
-     sudo cp /home/swgemu/workspace/MMOEngine/bin/idlc /usr/local/bin
+     sudo cp /home/$USER/workspace/MMOEngine/bin/idlc /usr/local/bin
      sudo chmod 755 /usr/local/bin/idlc
 done

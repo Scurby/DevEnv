@@ -38,12 +38,6 @@ nory() {
 gerrit_host='review.swgemu.com'
 gerrit_webport='8080'
 
-if [ -n "$1" ]; then
-  MODE=$1
-else
-  MODE=continue
-fi
-
 export HAVEX11=false
 
 if xset q > /dev/null 2>&1; then

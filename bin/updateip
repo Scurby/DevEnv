@@ -9,7 +9,7 @@
 # TODO make username and pass configurable
 
 #IP='63.142.253.15'
-IP=`/sbin/ifconfig gre0 | sed -n '/inet addr:/s/.*addr:\([^ ]*\)  .*/\1/p'`
+IP=`sudo /sbin/ifconfig venet0:0 | sed -n '/inet addr:/s/.*addr:\([^ ]*\)  .*/\1/p'`
 
 if [[ $IP =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
   echo "Server IP is     : $IP"

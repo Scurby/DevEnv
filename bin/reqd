@@ -21,23 +21,11 @@ yorn() {
   return 0
 }
 
-
-logstep() {
-  let "step=$step + 1"
-  echo ${tc_smso}$(head -c $(tput cols) < /dev/zero | tr '\0' '*')${tc_rmso}
-  echo "${tc_smso}**${tc_rmso} STEP $step >> $*"
-  logger -t first "STEP $step >> $*"
-}
-
-step=0
-tc_smso=$(tput smso)
-tc_rmso=$(tput rmso)
-
 #################
 # Required packages
 #################
-#RUN apt-get install -y gcc g++ make autoconf automake autotools-dev git libc6-dev libdb5.3-dev libreadline-dev libmysqlclient-dev libssl-dev git vim openjdk-7-jre-headless gdb gccxml mysql-server
-logstep "Required packages."
+
+echo "Required packages."
 
 echo  " The following packages or programs are required. Be prepared to enter password for sudo."
 echo
@@ -58,7 +46,7 @@ fi
 # Lua install
 # INFO -wget http://www.lua.org/ftp/lua-5.3.3.tar.gz ## saved to home/setup/
 #################
-logstep "Lua 5.3.3 Install"
+echo "Lua 5.3.3 Install"
 
 dir=~/DevEnv/setup/
 lua_base=~/DevEnv/setup/lua-5.3.3.tar.gz
@@ -123,7 +111,7 @@ fi
 ######################
 # Remove un-needed files
 ######################
-logstep "Finalizing install and removing un-needed files."
+echo "Finalizing install and removing un-needed files."
 
 sudo apt-get update -y | tee -a ~/Documents/pkglog.txt
 # sudo apt-get autoremove -y | tee -a ~/Documents/pkglog.txt

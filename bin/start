@@ -74,9 +74,9 @@ export ERRFILE="/tmp/run_dev$$"
 
   # Do we have a pre-made config file?
   # TODO test
-  if [ -f ~/run/conf/config.lua ]; then
+  if [ -f ~/DevEnv/run/conf/config.lua ]; then
       echo "** Using ~/run/conf/config.lua"
-      cp -v ~/run/conf/config.lua conf/
+      cp -v ~/DevEnv/run/conf/config.lua conf/
   fi
 
   trepath=$(echo ' print(TrePath)' | lua -l conf/config)

@@ -22,7 +22,7 @@ esac
 if sudo id > /dev/null 2>&1; then
   :
 else
-  echo "** This script requires sudo work properly - GET HELP **"
+  echo "** This script requires sudo to work properly - GET HELP **"
   exit 1
 fi
 

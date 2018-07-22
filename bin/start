@@ -64,18 +64,6 @@ export ERRFILE="/tmp/run_dev$$"
     exit 1
   fi
 
-  # Do we have a frozen object database?
-  if [ -f ~/run/backup.tar.gz ]; then
-    echo "** Restore object database from ~/run/backup.tar.gz"
-    rm -fr databases
-    tar xvf ~/run/backup.tar.gz
-  fi
-  # Do we have a frozen mysql db?
-  if [ -f ~/run/mysqldump.sql.gz ]; then
-    echo "** Restore mysql database from ~/run/mysqldump.sql.gz"
-    zcat ~/run/mysqldump.sql.gz | mysql swgemu
-  fi
-
   # Do we have a pre-made config file?
   if [ -f ~/DevEnv/run/conf/config.lua ]; then
       echo "** Using ~/DevEnv/run/conf/config.lua"

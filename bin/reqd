@@ -31,7 +31,7 @@ echo  " The following packages or programs are required. Be prepared to enter pa
 echo
 cd
 if yorn "Would you like to install the required packages now??"; then
-  for i in gcc g++ make autoconf automake autotools-dev git libc6-dev libdb5.3-dev libreadline-dev default-libmysqlclient-dev libssl-dev git vim openjdk-8-jre-headless gdb mysql-server mysql-workbench
+  for i in gcc g++ make autoconf automake autotools-dev git libc6-dev libdb5.3-dev libreadline-dev default-libmysqlclient-dev libssl-dev git vim openjdk-8-jre-headless gdb mysql-server mysql-workbench screen
 
       do
         echo " Installing ${i} ... " | tee -a ~/Documents/pkglog.txt
@@ -118,7 +118,7 @@ sudo apt-get update -y | tee -a ~/Documents/pkglog.txt
 sudo service mysql start
 cd $dir
 rm lua-5.3.3.tar.gz
-# rm -rf lua-5.3.3
+rm -rf lua-5.3.3
 echo
 echo "Run the 'reqd' script at any time to check installation of required packages."
 echo

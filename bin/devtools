@@ -30,8 +30,25 @@ yorn() {
 #################
 #Dropbox install
 #################
+# Headless Dropbox Install
+#################
 
-~/DevEnv/bin/dropbox
+echo "Dropbox"
+echo "Sources:"
+echo "https://www.dropbox.com/install?os=linux"
+
+cd
+if [ -d .dropbox-dist ]; then
+  echo "Dropbox already installed."
+  echo Starting sync..
+  ~/.dropbox-dist/dropboxd & disown -a
+  else
+    if yorn "Would you like to install Dropbox??"; then
+      cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+      ~/.dropbox-dist/dropboxd & disown -a
+    fi
+fi
+
 
 ################
 # Atom

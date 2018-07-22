@@ -43,7 +43,6 @@ The following scripts are run from the command line. They are numbered in the or
 1. reqd - Installs required packages and programs including Lua, BerkelyDB, and others.
 2. setup - Setup of development environment follows these steps:
    * Choose editor
-   * Setup git user.* config
    * Clone repos and checkout a local branch of Core3 origin/unstable
    * Symlinks (idlc)
    * Engine library

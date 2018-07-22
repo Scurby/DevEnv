@@ -85,32 +85,6 @@ fi
   lua -v
 
 
-##############################################################################
-# MySQL Install
-##############################################################################
-#if [ -f $mysql_pkg ]; then
-#   echo "Looks like MySQL is installed!"
-# else
-#   while ! yorn "Would you like to install MySQL now??"
-#     do
-#       echo "You need to do it before you can build and run the server. (cntl+c to exit)"
-#       sleep 1
-#     done
-#     echo " $mysql_pkg not found. "
-#     echo " "
-#     echo " Installing MySQL... "
-#     echo " "
-#   cd
-#     for i in mysql-server-core-5.5 mysql-server-5.5 mysql-workbench libmysqlclient-dev
-#       do
-#         echo " Installing ${i} ... "
-#         sudo apt-get install ${i} | tee -a ~/Documents/pkglog.txt
-#       done
-#fi
-
-######################
-# Remove un-needed files
-######################
 echo "Finalizing install and removing un-needed files."
 
 sudo apt-get update -y | tee -a ~/Documents/pkglog.txt

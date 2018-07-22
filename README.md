@@ -15,7 +15,7 @@ VirtualBox, VMWare, or native install.
 (or variant)
 * Debian - https://www.debian.org/
 
-## Add user to sudoers
+## Add new user to sudoers
 
 ### Login info
 * username = $USER
@@ -57,8 +57,6 @@ The following scripts are run from the command line. They are numbered in the or
 ### The following scripts are also useful...
 * createdb - mysql table, user, and pwd tool.
   * Ref: (http://jetpackweb.com/blog/2009/07/20/bash-script-to-create-mysql-database-and-user/)
-* myip -  display the ip of the VM and login port for quick configuration of the windows client.
-* updateip - Get ip address of local eth0 and update galaxy table as needed.
 * installed - Package and version check saved to /home/<file>.txt.
 
 **************************************************************************************

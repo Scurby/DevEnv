@@ -34,6 +34,8 @@ nory() {
   esac
   return 1
 }
+gerrit_host='review.swgemu.com'
+gerrit_webport='8080'
 
 
 ##############################################################################

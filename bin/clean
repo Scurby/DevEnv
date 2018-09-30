@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# clean - Wipes core3 engine
+# clean - Wipes core3, engine, mysql db
 
 
   echo "Starting clean" ;
@@ -8,7 +8,7 @@
   
   rm -fr ~/workspace/Core3 ~/workspace/MMOCoreORB ~/workspace/PublicEngine ~/workspace/MMOEngine
 
-##  mysql -e 'drop database swgemu' > /dev/null 2>&1 ;
+  sudo mysql -e 'drop database swgemu' > /dev/null 2>&1 ;
   # Everything gone? Your virtual machine is ready to share.
   # Done if all we needed to do was clean
 #   if [ "X$MODE" = "Xclean" ]; then

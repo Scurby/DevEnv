@@ -48,8 +48,8 @@ fi
 #################
 echo "Lua 5.3.3 Install"
 
-dir=~/DevEnv/setup/
-lua_base=~/DevEnv/setup/lua-5.3.3.tar.gz
+dir=~/setup/
+lua_base=~/setup/lua-5.3.3.tar.gz
 lua_ins=/usr/local/bin/lua
 
 if [ -f $lua_ins ]; then
@@ -69,10 +69,10 @@ if [ -f $lua_ins ]; then
   echo
   echo "Restoring basic lua install from $lua_base"
   echo
-  for dir in ~/DevEnv/setup/
+  for dir in ~/setup/
     do
       cd $dir
-      tar xzf ~/DevEnv/setup/lua-5.3.3.tar.gz | tee -a ~/Documents/pkglog.txt
+      tar xzf ~/setup/lua-5.3.3.tar.gz | tee -a ~/Documents/pkglog.txt
       cd lua-5.3.3
       sudo make linux install | tee -a ~/Documents/pkglog.txt
       sudo make test | tee -a ~/Documents/pkglog.txt

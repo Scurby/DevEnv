@@ -4,7 +4,7 @@
 #
 
 cd ~/workspace/MMOCoreORB
-export CLASSPATH=/home/scurby/workspace/Core3/MMOEngine/bin/idlc.jar
+export CLASSPATH=~/workspace/Core3/MMOEngine/bin/idlc.jar
 
 EXTRA=$1
 

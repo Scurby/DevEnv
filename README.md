@@ -1,33 +1,22 @@
-# SWGEmu Development Environment setup
+# SWGEmu Development Environment WSL setup
 
 ****************************************************************************************************************
 Special Thanks to lordkator for the initial FastTrack VM Image and the scripts that this repository is based on.
 ****************************************************************************************************************
 
-VirtualBox, VMWare, or native install.
+## Install the Windows Subsystem for Linux (WSL)
 
-	8g mem
-	32g virtual drive
-	max cores
-	bridged network
+<https://docs.microsoft.com/en-us/windows/wsl/install-win10>
 
-# Install Debian 9.x 64bit 
-(or variant)
-* Debian - https://www.debian.org/
+## Install Debian 9.x 64bit
 
-## Add new user to sudoers
+<https://www.microsoft.com/en-us/p/debian-gnu-linux/9msvkqc78pk6?rtc=1#activetab=pivot:overviewtab>
 
-### Login info
-* username = $USER
-* password = 
-* root pw = 
-
-
-# Import scripts
+## Import scripts
 
 Copy this series of commands into a terminal: Installs git, downloads scripts and installs them.
 
-	sudo apt-get update && sudo apt-get install -y -q git && mkdir DevEnv && cd DevEnv && git clone https://github.com/Scurby/DevEnv.git && cp -i ~/DevEnv/README.md ~/Documents && mkdir setup && cp -i ~/setup/* ~/setup/ && mkdir run && cp -r ~/DevEnv/run/* ~/run/ && chmod -v +x ~/DevEnv/bin/* && cat ~/DevEnv/bin/pathto &>> ~/.bashrc
+  sudo apt-get update && sudo apt-get install -y -q git && git clone https://github.com/Scurby/DevEnv.git && cp -i ~/DevEnv/README.md ~/Documents && mkdir setup && mkdir run && cp -r ~/DevEnv/run/* ~/run/ && chmod -v +x ~/DevEnv/bin/* && cat ~/DevEnv/bin/pathto &>> ~/.bashrc
 
 ## Run scripts
 
@@ -35,8 +24,6 @@ The following scripts are run from the command line. They are numbered in the or
 
 1. reqd - Installs required packages and programs including Lua, BerkelyDB, and others.
 2. setup - Setup of development environment follows these steps:
-   * Choose editor
-   * Setup git user.* config
    * Clone repos and checkout a local branch of Core3 origin/unstable
    * Symlinks (idlc)
    * Engine library
@@ -49,18 +36,7 @@ The following scripts are run from the command line. They are numbered in the or
    * Using this command to start the server will:
    * launches the server under gdb on a 'screen'.
    * outputs a screenlog to ~/run/screenlog*
-   * use the config.lua in ~/run/conf/ to replace the config.lua in ~/MMOCoreORB/bin/conf.
    * uses gdb in batch mode and starts with the commands  in ~/run/run_gdb which you can change to your pleasing; (breakpoints, dumps, settings etc.)
-5. devtools - Installs Optional packages including xclip, vim, and others.
-6. latest - do a quick git-stash, git-pull, and git-stash-apply so you can get to the latest code w/o loosing local work.
+5. latest - do a quick git-stash, git-pull, and git-stash-apply so you can get to the latest code w/o loosing local work.
 
-### The following scripts are also useful...
-* createdb - mysql table, user, and pwd tool.
-  * Ref: (http://jetpackweb.com/blog/2009/07/20/bash-script-to-create-mysql-database-and-user/)
-* installed - Package and version check saved to /home/<file>.txt.
-
-**************************************************************************************
-#### FIXME's
-* godmode - sets acct with ID=1 to Admin (15). Run after first acct is created.
-
-**************************************************************************************
+****************************************************************************************************************

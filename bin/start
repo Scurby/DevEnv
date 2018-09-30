@@ -65,10 +65,10 @@ export ERRFILE="/tmp/run_dev$$"
   fi
 
   # Do we have a pre-made config file?
-  if [ -f ~/DevEnv/run/conf/config.lua ]; then
-      echo "** Using ~/DevEnv/run/conf/config.lua"
-      cp -v ~/DevEnv/run/conf/config.lua conf/
-  fi
+#  if [ -f ~/DevEnv/run/conf/config.lua ]; then
+#      echo "** Using ~/DevEnv/run/conf/config.lua"
+#      cp -v ~/DevEnv/run/conf/config.lua conf/
+#  fi
   
   # Are all the tres loaded?
   trepath=$(echo ' print(TrePath)' | lua -l conf/config)

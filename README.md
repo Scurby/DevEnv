@@ -1,12 +1,8 @@
-# SWGEmu Development Environment WSL setup
+# SWGEmu Development Environment setup
 
 ****************************************************************************************************************
 Special Thanks to lordkator for the initial FastTrack VM Image and the scripts that this repository is based on.
 ****************************************************************************************************************
-
-## Install the Windows Subsystem for Linux (WSL)
-
-<https://docs.microsoft.com/en-us/windows/wsl/install-win10>
 
 ## Install Debian 9.x 64bit
 

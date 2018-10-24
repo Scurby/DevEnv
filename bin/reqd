@@ -31,7 +31,7 @@ echo  " The following packages or programs are required. Be prepared to enter pa
 echo
 cd
 if yorn "Would you like to install the required packages now??"; then
-  for i in gcc g++ make autoconf automake autotools-dev git libc6-dev libdb5.3-dev libreadline-dev default-libmysqlclient-dev libssl-dev git vim openjdk-8-jre-headless gdb mysql-server mysql-workbench screen
+  for i in build-essential libmysqlclient-dev liblua5.3-dev libdb5.3-dev libssl-dev cmake git default-jre libssl-dev git
 
       do
         echo " Installing ${i} ... " | tee -a ~/Documents/pkglog.txt
@@ -42,54 +42,12 @@ if yorn "Would you like to install the required packages now??"; then
     exit 0
 fi
 
-#################
-# Lua install
-# INFO -wget http://www.lua.org/ftp/lua-5.3.3.tar.gz ## saved to home/setup/
-#################
-echo "Lua 5.3.3 Install"
-
-dir=~/setup/
-lua_base=~/setup/lua-5.3.3.tar.gz
-lua_ins=/usr/local/bin/lua
-
-if [ -f $lua_ins ]; then
- echo "Great, looks like you have Lua installed.!"
- lua -v
-  else
-    while ! yorn "Would you like to install Lua 5.3.3 now??"
-      do
-        echo "***You need to do it before you can build the server.*** )"
-        sleep 1
-      done
-  if [ ! -f $lua_base ]; then
-    echo "Downloading required lua package to ~/home/setup/. Please wait.."
-    cd $dir
-    wget http://www.lua.org/ftp/lua-5.3.3.tar.gz
-  fi
-  echo
-  echo "Restoring basic lua install from $lua_base"
-  echo
-  for dir in ~/setup/
-    do
-      cd $dir
-      tar xzf ~/setup/lua-5.3.3.tar.gz | tee -a ~/Documents/pkglog.txt
-      cd lua-5.3.3
-      sudo make linux install | tee -a ~/Documents/pkglog.txt
-      sudo make test | tee -a ~/Documents/pkglog.txt
-      cd
-    done
-  echo
-  echo "You have successfully installed Lua if you see 'Lua 5.3.3  Copyright (C) 1994-2016 Lua.org, PUC-Rio' in the terminal."
-  echo
-fi
-  lua -v
-
-
 echo "Finalizing install and removing un-needed files."
 
 sudo apt-get update -y | tee -a ~/Documents/pkglog.txt
 # sudo apt-get autoremove -y | tee -a ~/Documents/pkglog.txt
 sudo service mysql start
+mysql -h<MYSQLHOST> -u<MYSQLUSER> -p<MYSQLPASSWORD> < sql/swgemu.sql
 cd $dir
 rm lua-5.3.3.tar.gz
 rm -rf lua-5.3.3

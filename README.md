@@ -6,8 +6,6 @@ Special Thanks to lordkator for the initial FastTrack VM Image and the scripts t
 
 ## Install Debian 9.x 64bit
 
-<https://www.microsoft.com/en-us/p/debian-gnu-linux/9msvkqc78pk6?rtc=1#activetab=pivot:overviewtab>
-
 ## Import scripts
 
 Copy this series of commands into a terminal: Installs git, downloads scripts and installs them.

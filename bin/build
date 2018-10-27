@@ -3,14 +3,14 @@
 # build - simple command line build script
 #
 
-cd ~/workspace/MMOCoreORB
-export CLASSPATH=~/workspace/Core3/MMOEngine/bin/idlc.jar
+cd ~/workspace/Core3/MMOCoreORB
+#export CLASSPATH=~/workspace/Core3/MMOEngine/bin/idlc.jar
 
 EXTRA=$1
 
 # Just in case they've not ran config yet
 # TODO add check to see if config.log has changed
-if [ ! -f build/unix/config.log ]; then
+if [ ! -f build/unix/CMakeFiles/CMakeOutout.log ]; then
   EXTRA='config'
 fi
 
@@ -20,7 +20,7 @@ case $EXTRA in
 esac
 
 # Always run build
-if make -k build; then
+if make -k ; then
   echo "** BUILD SUCCESS IN $SECONDS SECOND(S) **"
   exit 0
 fi

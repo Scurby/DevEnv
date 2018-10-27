@@ -45,7 +45,7 @@ echo "Clone repos"
 mkdir -p ~/workspace > /dev/null 2>&1
 
 cd ~/workspace
-for i in Core3 PublicEngine Tools
+for i in Core3 Tools
 do
   if [ -d $i/.git ]; then
     echo "Repo $i is cloned in ~/workspace/$i"
@@ -68,46 +68,6 @@ do
   fi
 done
 
-##############################################################################
-# Make easy links so it's more compatible with the old setup
-##############################################################################
-echo "Symlinks"
-
-cd ~/workspace
-rm -f MMOCoreORB MMOEngine Core3/MMOEngine
-(cd $PWD/Core3;ln -s ../PublicEngine/MMOEngine .)
-ln -s PublicEngine/MMOEngine .
-ln -s Core3/MMOCoreORB .
-ls -l MMOCoreORB MMOEngine Core3/MMOEngine | while read f
-do
-  echo $f
-	 sudo chmod 755 ~/workspace/MMOEngine/bin/idlc
-     sudo cp ~/workspace/MMOEngine/bin/idlc /usr/local/bin
-     sudo chmod 755 /usr/local/bin/idlc
-done
-
-##############################################################################
-# Figure out what Engine library to link to
-##############################################################################
-echo "Engine Library"
-englib=PublicEngine/MMOEngine/lib/unix/libengine3.a
-if [ ! -L $englib ]; then
-  echo "Setup unix library link"
-  mkdir -p PublicEngine/MMOEngine/lib/unix > /dev/null 2>&1
-  (
-  cd PublicEngine/MMOEngine/lib/unix
-  if [ $(uname -s) = "Darwin" ]; then
-    ln -s ../lion64/libengine3.a
-  else
-    case $(uname -m) in
-      x86_64 ) ln -s ../linux64/libengine3.a ;;
-      i386 ) ln -s ../linux32/libengine3.a ;;
-    esac
-  fi
-  )
-fi
-
-echo "Using engine library: $(readlink $englib)"
 
 
 ##############################################################################
@@ -141,9 +101,9 @@ fi
 # TODO Edit tre path as needed
 ##############################################################################
 echo "Server configuration"
-rundir=~/workspace/MMOCoreORB/bin/
+rundir=~/workspace/Core3/MMOCoreORB/bin/
 runcfg=${rundir}conf/config.lua
-runsrc=~/workspace/MMOCoreORB/bin/conf/config.lua
+runsrc=~/workspace/Core3/MMOCoreORB/bin/conf/config.lua
 if [ -f $runcfg ]; then
   echo "$runcfg already setup"
 else
@@ -179,18 +139,8 @@ if [ -f "${trepath}/patch_sku1_14_00.tre" ]; then
   echo "Looks like your tre files are properly loaded in ${trepath}"
 else
   #ip=`/sbin/ifconfig eth0 | sed -n '/inet addr:/s/.*addr:\([^ ]*\)  .*/\1/p'`
-  echo "NOTE: You must make sure to copy all 53 of the *.tre files from your game disk to: $trepath"
-  echo
-  echo "EXAMPLE (on OSX box):"
-  echo
-  echo "  cd /Volumes/BOOTCAMP/SWGEmu"
-  echo "  scp *.tre swgemu@${ip}:${trepath}"
-  echo
-  echo "Windows host options"
-  echo
-  echo "  On Windows host copy and paste will normally work."
-  echo "  Dropbox or other file storage."
-  # TODO - Windows examples!?
+  echo "NOTE: You must make sure to copy all 54 of the *.tre files from your game disk to: $trepath"
+ 
 
   while ! yorn "Did you do this yet?"
   do
@@ -198,7 +148,7 @@ else
     sleep 1
   done
 
-  if [ ! -f "${trepath}/patch_sku1_14_00.tre" ]; then
+  if [ ! -f "${trepath}/swgemu_hotfix.tre" ]; then
     echo "ERROR: It appears you still do not have the *.tre files in ${trepath}"
   fi
 fi

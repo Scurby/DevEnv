@@ -4,7 +4,7 @@
 Special Thanks to lordkator for the initial FastTrack VM Image and the scripts that this repository is based on.
 ****************************************************************************************************************
 
-## Install Debian 9.x 64bit
+## Install Debian 9.x 64bit or Ubuntu 16.x
 
 ## Import scripts
 
@@ -21,8 +21,6 @@ The following scripts are run from the command line. They are numbered in the or
 1. reqd - Installs required packages and programs including Lua, BerkelyDB, and others.
 2. setup - Setup of development environment follows these steps:
    * Clone repos and checkout a local branch of Core3 origin/unstable
-   * Symlinks (idlc)
-   * Engine library
    * Server configuration
    * Tre files (They will need to be copied or moved)
    * Asks if you want to build and run the server.
@@ -30,9 +28,8 @@ The following scripts are run from the command line. They are numbered in the or
    * 3 options- build, build config, build clean
 4. start - Builds and runs the development server.
    * Using this command to start the server will:
-   * launches the server under gdb on a 'screen'.
+   * launches the server under gdb on a 'screen'with gdb.
    * outputs a screenlog to ~/run/screenlog*
-   * uses gdb in batch mode and starts with the commands  in ~/run/run_gdb which you can change to your pleasing; (breakpoints, dumps, settings etc.)
 5. latest - do a quick git-stash, git-pull, and git-stash-apply so you can get to the latest code w/o loosing local work.
 
 ****************************************************************************************************************

@@ -31,7 +31,7 @@ echo  " The following packages or programs are required. Be prepared to enter pa
 echo
 cd
 if yorn "Would you like to install the required packages now??"; then
-  for i in build-essential default-libmysqlclient-dev liblua5.3-dev libdb5.3-dev libssl-dev cmake git default-jre libssl-dev git mysql-server
+  for i in build-essential ninja-build default-libmysqlclient-dev liblua5.3-dev libdb5.3-dev libssl-dev cmake git default-jre libssl-dev git mysql-server
 
       do
         echo " Installing ${i} ... " | tee -a ~/Documents/pkglog.txt

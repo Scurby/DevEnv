@@ -17,6 +17,7 @@ fi
 case $EXTRA in
   config ) make config; make clean ;;
   clean ) make clean ;;
+  ninja ) make build-ninja ;;  
 esac
 
 # Always run build

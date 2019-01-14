@@ -8,7 +8,7 @@
 #
 
 # Do we have a bin?
-if [ ! -d ~/workspace/MMOCoreORB/bin ]; then
+if [ ! -d ~/workspace/Core3/MMOCoreORB/bin ]; then
   echo "** No bin dir? Did you run: 'setup' yet?"
   echo "**ABORT**"
   exit 2
@@ -29,7 +29,7 @@ if SERVER_PID=$(pgrep core3); then
   exit 0
 fi
 
-cd ~/workspace/MMOCoreORB/bin
+cd ~/workspace/Core3/MMOCoreORB/bin
 
 # Roll over old screen logs and Save last screen log
 if [ -f 'screenlog.0' ]; then
@@ -90,4 +90,4 @@ if [ -f $ERRFILE ]; then
 fi
 
 # Everthing looks good, run under gdb on a screen
-exec screen -L ~/workspace/MMOCoreORB/bin/screenlog.0 gdb -x ~/DevEnv/run/rgdb ./core3
+exec screen -L ~/workspace/Core3/MMOCoreORB/bin/screenlog.0 gdb -x ~/DevEnv/run/rgdb ./core3
